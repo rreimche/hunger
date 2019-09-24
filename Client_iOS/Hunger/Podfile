@@ -8,11 +8,11 @@ target 'Hunger' do
   # Pods for Hunger
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
-  pod 'Firebase/Firestore'
+#  pod 'Firebase/Firestore'
   pod 'Fabric'
   pod 'Crashlytics'
-  pod 'Firebase/Performance'
-  pod 'Firebase/Database'
+#  pod 'Firebase/Performance'
+#  pod 'Firebase/Database'
 
   target 'HungerTests' do
     inherit! :search_paths

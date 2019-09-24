@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1100"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7D6ED195D9283AFF0210C554D3E1D2F0"
+               BlueprintIdentifier = "2AB046ECB8599AE96250A2DCCF57B881"
                BuildableName = "Pods_Hunger.framework"
                BlueprintName = "Pods-Hunger"
                ReferencedContainer = "container:Pods.xcodeproj">

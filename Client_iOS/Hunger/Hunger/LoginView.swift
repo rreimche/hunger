@@ -7,17 +7,59 @@
 //
 
 import SwiftUI
+import Crashlytics
 
 struct LoginView: View {
+    
     @State private var email : String = ""
     @State private var password : String = ""
+    @State var loading = false
+    @State var error = false
+    
+    @EnvironmentObject var session : SessionStore
+    
+    func logIn () {
+        loading = true
+        error = false
+        session.signIn(email: email, password: password) { (result, error) in
+            self.loading = false
+            if error != nil {
+                self.error = true
+            } else {
+                self.email = ""
+                self.password = ""
+            }
+        }
+    }
+    
+    func signUp () {
+        loading = true
+        error = false
+        session.signUp(email: email, password: password) { (result, error) in
+            self.loading = false
+            if error != nil {
+                self.error = true
+            } else {
+                self.email = ""
+                self.password = ""
+            }
+        }
+    }
+    
+    func crash(){
+        Crashlytics.sharedInstance().crash()
+    }
     
     var body: some View {
         NavigationView{
             Form {
                 TextField("Email", text: $email)
                 SecureField("Password", text: $password)
-                Button(action: {}, label: {Text("go")})
+                Button(action: logIn){ Text("Log In") }
+                Button(action: signUp){ Text("Sign Up")}
+                if error { Text("Something's wrong") }
+
+                Button(action: crash){Text("Crash")}
             }
             .navigationBarTitle("Log In")
         }

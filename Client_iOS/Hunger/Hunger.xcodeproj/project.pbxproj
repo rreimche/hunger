@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02AC0CCA233A5A5100521422 /* SessionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0CC9233A5A5100521422 /* SessionStorage.swift */; };
+		02AC0CCC233A5A8500521422 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0CCB233A5A8500521422 /* User.swift */; };
+		02AC0CD2233A66AF00521422 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0CD1233A66AF00521422 /* MainMenuView.swift */; };
 		02CBED3723391D8800EF7F7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CBED3623391D8800EF7F7F /* AppDelegate.swift */; };
 		02CBED3923391D8800EF7F7F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CBED3823391D8800EF7F7F /* SceneDelegate.swift */; };
 		02CBED3C23391D8800EF7F7F /* Hunger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 02CBED3A23391D8800EF7F7F /* Hunger.xcdatamodeld */; };
@@ -41,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02AC0CC9233A5A5100521422 /* SessionStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStorage.swift; sourceTree = "<group>"; };
+		02AC0CCB233A5A8500521422 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		02AC0CD1233A66AF00521422 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		02CBED3323391D8800EF7F7F /* Hunger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hunger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02CBED3623391D8800EF7F7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02CBED3823391D8800EF7F7F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +132,9 @@
 				02CBED3823391D8800EF7F7F /* SceneDelegate.swift */,
 				02CBED3D23391D8800EF7F7F /* ContentView.swift */,
 				02CBED69233A007F00EF7F7F /* LoginView.swift */,
+				02AC0CC9233A5A5100521422 /* SessionStorage.swift */,
+				02AC0CCB233A5A8500521422 /* User.swift */,
+				02AC0CD1233A66AF00521422 /* MainMenuView.swift */,
 				02CBED3F23391D8B00EF7F7F /* Assets.xcassets */,
 				02CBED4423391D8B00EF7F7F /* LaunchScreen.storyboard */,
 				02CBED4723391D8B00EF7F7F /* Info.plist */,
@@ -182,7 +191,6 @@
 				1373E662A0809F811BF5FADF /* Pods-HungerUITests.debug.xcconfig */,
 				FABA4152CC5C229B67A5A611 /* Pods-HungerUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -198,6 +206,7 @@
 				02CBED3023391D8800EF7F7F /* Frameworks */,
 				02CBED3123391D8800EF7F7F /* Resources */,
 				73837F0BD38242C671DBEE69 /* [CP] Embed Pods Frameworks */,
+				02EF10F4233A8F9200C65F2A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -318,6 +327,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		02EF10F4233A8F9200C65F2A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
+		};
 		2938797F2A7CA04A0C7A748C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -371,28 +397,16 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Hunger/Pods-Hunger-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,8 +446,11 @@
 				02CBED3C23391D8800EF7F7F /* Hunger.xcdatamodeld in Sources */,
 				02CBED3723391D8800EF7F7F /* AppDelegate.swift in Sources */,
 				02CBED3E23391D8800EF7F7F /* ContentView.swift in Sources */,
+				02AC0CD2233A66AF00521422 /* MainMenuView.swift in Sources */,
 				02CBED6A233A007F00EF7F7F /* LoginView.swift in Sources */,
+				02AC0CCA233A5A5100521422 /* SessionStorage.swift in Sources */,
 				02CBED3923391D8800EF7F7F /* SceneDelegate.swift in Sources */,
+				02AC0CCC233A5A8500521422 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

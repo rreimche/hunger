@@ -1,0 +1,6 @@
+framework module Pods_HungerUITests {
+  umbrella header "Pods-HungerUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

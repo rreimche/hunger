@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>939872184628-7mq8vggmdf7i4j5gk8r4k50toks6hnai.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.939872184628-7mq8vggmdf7i4j5gk8r4k50toks6hnai</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDkRWs6f1cBPtU2MTfEH0WPCzC6S2ed_X8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>939872184628</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>RR.Hunger2</string>
+	<key>PROJECT_ID</key>
+	<string>hunger-cd8c3</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hunger-cd8c3.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:939872184628:ios:d709aba34a35b53ca45d61</string>
+	<key>DATABASE_URL</key>
+	<string>https://hunger-cd8c3.firebaseio.com</string>
+</dict>
+</plist>

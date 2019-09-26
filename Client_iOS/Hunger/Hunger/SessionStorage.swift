@@ -13,8 +13,8 @@ import Firebase
 import Combine
 
 class SessionStore : ObservableObject {
-    var didChange = PassthroughSubject<SessionStore, Never>()
-    var session: User? { didSet { self.didChange.send(self) }}
+    //var didChange = PassthroughSubject<SessionStore, Never>()
+    @Published var user: User? // { didSet { self.didChange.send(self) }}
     var handle: AuthStateDidChangeListenerHandle?
 
     func listen () {
@@ -23,14 +23,14 @@ class SessionStore : ObservableObject {
             if let user = user {
                 // if we have a user, create a new user model
                 print("Got user: \(user)")
-                self.session = User(
+                self.user = User(
                     uid: user.uid,
                     displayName: user.displayName,
                     email: user.email
                 )
             } else {
                 // if we don't have a user, set our session to nil
-                self.session = nil
+                self.user = nil
             }
         }
     }
@@ -44,10 +44,14 @@ class SessionStore : ObservableObject {
         
         //TODO use the given handler if it is given
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            let user = authResult!.user
-            print("AuthResult: \(String(describing: authResult))")
-            print("User: \(String(describing: user.email))")
-            print("Error: \(String(describing: error))")
+            if let user = authResult?.user {
+                print("AuthResult: \(String(describing: authResult))")
+                print("User: \(String(describing: user.email))")
+            } else {
+                print("AuthResult: \(String(describing: authResult))") 
+                print("Error: \(String(describing: error))")
+            }
+            
             
         }
     }
@@ -70,7 +74,7 @@ class SessionStore : ObservableObject {
     func signOut () -> Bool {
         do {
             try Auth.auth().signOut()
-            self.session = nil
+            self.user = nil
             return true
         } catch {
             return false

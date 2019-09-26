@@ -17,7 +17,7 @@ struct MainMenuView: View {
     
     var body: some View {
         Group {
-          if (session.session != nil) {
+          if (session.user != nil) {
             Text("Hello user!")
           } else {
             LoginView()

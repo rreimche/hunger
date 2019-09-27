@@ -20,7 +20,7 @@ struct ContentView: View {
           if (session.user != nil) {
             MainMenuView()
           } else {
-            LoginView()
+            SignInView()
           }
         }.onAppear(perform: getUser)
     }

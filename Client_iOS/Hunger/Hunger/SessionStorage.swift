@@ -41,19 +41,7 @@ class SessionStore : ObservableObject {
         handler: @escaping AuthDataResultCallback
         ) {
         
-        
-        //TODO use the given handler if it is given
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            if let user = authResult?.user {
-                print("AuthResult: \(String(describing: authResult))")
-                print("User: \(String(describing: user.email))")
-            } else {
-                print("AuthResult: \(String(describing: authResult))") 
-                print("Error: \(String(describing: error))")
-            }
-            
-            
-        }
+        Auth.auth().createUser(withEmail: email, password: password, completion: handler)
     }
 
     func signIn(
@@ -61,14 +49,7 @@ class SessionStore : ObservableObject {
         password: String,
         handler: @escaping AuthDataResultCallback
         ) {
-        //TODO use the given handler if it is given
-        Auth.auth().signIn(withEmail: email, password: password){ [weak self] authResult, error in
-            guard let strongSelf = self else { return }
-            let user = authResult!.user
-            print("AuthResult: \(String(describing: authResult))")
-            print("User: \(String(describing: user.email))")
-            print("Error: \(String(describing: error))")
-        }
+        Auth.auth().signIn(withEmail: email, password: password, completion: handler)
     }
 
     func signOut () -> Bool {

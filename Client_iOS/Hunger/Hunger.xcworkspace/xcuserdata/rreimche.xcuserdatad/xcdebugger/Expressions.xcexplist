@@ -10,5 +10,16 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in SignInView.body.getter:SignInView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in SignInView.signIn():SignInView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "error!.localizedDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

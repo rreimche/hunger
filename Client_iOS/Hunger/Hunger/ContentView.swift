@@ -9,8 +9,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var session: SessionStore
+    
+    func getUser () {
+        session.listen()
+    }
+    
     var body: some View {
-        Text("Hello World")
+        Group {
+          if (session.user != nil) {
+            MainMenuView()
+          } else {
+            LoginView()
+          }
+        }.onAppear(perform: getUser)
     }
 }
 

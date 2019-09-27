@@ -7,22 +7,37 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct MainMenuView: View {
    @EnvironmentObject var session: SessionStore
     
-    func getUser () {
-        session.listen()
+    func displayName() -> String {
+        
+        if let displayName = session.user!.displayName {
+            return displayName
+        } else if let email = session.user!.email {
+            return email
+        } else {
+            return "User"
+        }
+    }
+    
+    func logOut() {
+        let firebaseAuth = Auth.auth()
+        do {
+          try firebaseAuth.signOut()
+            
+        } catch let signOutError as NSError {
+          print ("Error signing out: %@", signOutError)
+        }
     }
     
     var body: some View {
         Group {
-          if (session.user != nil) {
-            Text("Hello user!")
-          } else {
-            LoginView()
-          }
-        }.onAppear(perform: getUser)
+            Text("Hello \(displayName())!")
+            Button(action: logOut) { Text("Log out") }
+        }
     }
 }
 

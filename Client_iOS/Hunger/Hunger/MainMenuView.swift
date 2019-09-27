@@ -36,16 +36,19 @@ struct MainMenuView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section {
-                    NavigationLink(destination: PlayAsHumanView()){ Text("Start as human") }
-                    NavigationLink(destination: PlayAsZombieView()){ Text("Start as zombie") }
-                    NavigationLink(destination: HallOfFameView()){ Text("Hall of Fame") }
+                Section(header: Text("Play as")) {
+                    NavigationLink(destination: PlayAsHumanView()){ Text("👩🏻‍💼🙎🏻‍♂️").font(.largeTitle).multilineTextAlignment(.center) }
+                    NavigationLink(destination: PlayAsZombieView()){ Text("🧟‍♀️🧟‍♂️").font(.largeTitle).multilineTextAlignment(.center) }
+                }
+                
+                Section{
+                    NavigationLink(destination: HallOfFameView()){ Text("Hall of the Toughest 👍") }
                 }
                 
                 Section {
                     Button(action: logOut) { Text("Log out") }
                 }
-            }.navigationBarTitle("Hunger Main Menu")
+            }.navigationBarTitle("Main Menu")
         }
         
     }

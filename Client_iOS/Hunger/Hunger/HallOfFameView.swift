@@ -9,8 +9,18 @@
 import SwiftUI
 
 struct HallOfFameView: View {
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            ScoreListView()
+                .tabItem{Text("Total achievement (H&Z)")}
+            
+            ScoreListView()
+                .tabItem{Text("As Human")}
+            
+            ScoreListView()
+                .tabItem{Text("As Zombie")}
+        }
     }
 }
 

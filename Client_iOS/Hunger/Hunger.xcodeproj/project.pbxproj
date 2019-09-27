@@ -10,6 +10,7 @@
 		0242A163233E3202005F9673 /* PlayAsHumanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A162233E3202005F9673 /* PlayAsHumanView.swift */; };
 		0242A165233E321C005F9673 /* PlayAsZombieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A164233E321C005F9673 /* PlayAsZombieView.swift */; };
 		0242A167233E322D005F9673 /* HallOfFameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A166233E322D005F9673 /* HallOfFameView.swift */; };
+		0242A169233E3E0A005F9673 /* ScoreListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A168233E3E0A005F9673 /* ScoreListView.swift */; };
 		02AC0CCA233A5A5100521422 /* SessionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0CC9233A5A5100521422 /* SessionStorage.swift */; };
 		02AC0CCC233A5A8500521422 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0CCB233A5A8500521422 /* User.swift */; };
 		02AC0CD2233A66AF00521422 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0CD1233A66AF00521422 /* MainMenuView.swift */; };
@@ -50,6 +51,7 @@
 		0242A162233E3202005F9673 /* PlayAsHumanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAsHumanView.swift; sourceTree = "<group>"; };
 		0242A164233E321C005F9673 /* PlayAsZombieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAsZombieView.swift; sourceTree = "<group>"; };
 		0242A166233E322D005F9673 /* HallOfFameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HallOfFameView.swift; sourceTree = "<group>"; };
+		0242A168233E3E0A005F9673 /* ScoreListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreListView.swift; sourceTree = "<group>"; };
 		02AC0CC9233A5A5100521422 /* SessionStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStorage.swift; sourceTree = "<group>"; };
 		02AC0CCB233A5A8500521422 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		02AC0CD1233A66AF00521422 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				0242A162233E3202005F9673 /* PlayAsHumanView.swift */,
 				0242A164233E321C005F9673 /* PlayAsZombieView.swift */,
 				0242A166233E322D005F9673 /* HallOfFameView.swift */,
+				0242A168233E3E0A005F9673 /* ScoreListView.swift */,
 				02CBED3F23391D8B00EF7F7F /* Assets.xcassets */,
 				02CBED4423391D8B00EF7F7F /* LaunchScreen.storyboard */,
 				02CBED4723391D8B00EF7F7F /* Info.plist */,
@@ -461,6 +464,7 @@
 				02AC0CCA233A5A5100521422 /* SessionStorage.swift in Sources */,
 				0242A163233E3202005F9673 /* PlayAsHumanView.swift in Sources */,
 				02CBED3923391D8800EF7F7F /* SceneDelegate.swift in Sources */,
+				0242A169233E3E0A005F9673 /* ScoreListView.swift in Sources */,
 				0242A167233E322D005F9673 /* HallOfFameView.swift in Sources */,
 				02AC0CCC233A5A8500521422 /* User.swift in Sources */,
 			);

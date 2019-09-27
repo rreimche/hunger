@@ -34,10 +34,20 @@ struct MainMenuView: View {
     }
     
     var body: some View {
-        Group {
-            Text("Hello \(displayName())!")
-            Button(action: logOut) { Text("Log out") }
+        NavigationView {
+            Form {
+                Section {
+                    NavigationLink(destination: PlayAsHumanView()){ Text("Start as human") }
+                    NavigationLink(destination: PlayAsZombieView()){ Text("Start as zombie") }
+                    NavigationLink(destination: HallOfFameView()){ Text("Hall of Fame") }
+                }
+                
+                Section {
+                    Button(action: logOut) { Text("Log out") }
+                }
+            }.navigationBarTitle("Hunger Main Menu")
         }
+        
     }
 }
 

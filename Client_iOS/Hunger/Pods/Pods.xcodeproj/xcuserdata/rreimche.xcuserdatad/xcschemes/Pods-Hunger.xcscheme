@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2AB046ECB8599AE96250A2DCCF57B881"
+               BlueprintIdentifier = "2109D35E02A8D824F8C4537CCDDEDBEF"
                BuildableName = "Pods_Hunger.framework"
                BlueprintName = "Pods-Hunger"
                ReferencedContainer = "container:Pods.xcodeproj">

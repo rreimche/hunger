@@ -11,6 +11,8 @@
 		0242A165233E321C005F9673 /* PlayAsZombieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A164233E321C005F9673 /* PlayAsZombieView.swift */; };
 		0242A167233E322D005F9673 /* HallOfFameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A166233E322D005F9673 /* HallOfFameView.swift */; };
 		0242A169233E3E0A005F9673 /* ScoreListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A168233E3E0A005F9673 /* ScoreListView.swift */; };
+		02A3A948234E048F000827AB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3A947234E048F000827AB /* GameView.swift */; };
+		02A3A94A234E09D6000827AB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3A949234E09D6000827AB /* MapView.swift */; };
 		02AC0CCA233A5A5100521422 /* SessionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0CC9233A5A5100521422 /* SessionStorage.swift */; };
 		02AC0CCC233A5A8500521422 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0CCB233A5A8500521422 /* User.swift */; };
 		02AC0CD2233A66AF00521422 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0CD1233A66AF00521422 /* MainMenuView.swift */; };
@@ -52,6 +54,8 @@
 		0242A164233E321C005F9673 /* PlayAsZombieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAsZombieView.swift; sourceTree = "<group>"; };
 		0242A166233E322D005F9673 /* HallOfFameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HallOfFameView.swift; sourceTree = "<group>"; };
 		0242A168233E3E0A005F9673 /* ScoreListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreListView.swift; sourceTree = "<group>"; };
+		02A3A947234E048F000827AB /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		02A3A949234E09D6000827AB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		02AC0CC9233A5A5100521422 /* SessionStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStorage.swift; sourceTree = "<group>"; };
 		02AC0CCB233A5A8500521422 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		02AC0CD1233A66AF00521422 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
@@ -145,6 +149,8 @@
 				02AC0CD1233A66AF00521422 /* MainMenuView.swift */,
 				0242A162233E3202005F9673 /* PlayAsHumanView.swift */,
 				0242A164233E321C005F9673 /* PlayAsZombieView.swift */,
+				02A3A947234E048F000827AB /* GameView.swift */,
+				02A3A949234E09D6000827AB /* MapView.swift */,
 				0242A166233E322D005F9673 /* HallOfFameView.swift */,
 				0242A168233E3E0A005F9673 /* ScoreListView.swift */,
 				02CBED3F23391D8B00EF7F7F /* Assets.xcassets */,
@@ -219,6 +225,7 @@
 				02CBED3123391D8800EF7F7F /* Resources */,
 				73837F0BD38242C671DBEE69 /* [CP] Embed Pods Frameworks */,
 				02EF10F4233A8F9200C65F2A /* ShellScript */,
+				711BDD0AB89FB1DEA9E9EDF3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -400,6 +407,30 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		711BDD0AB89FB1DEA9E9EDF3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Hunger/Pods-Hunger-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hunger/Pods-Hunger-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		73837F0BD38242C671DBEE69 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -462,10 +493,12 @@
 				0242A165233E321C005F9673 /* PlayAsZombieView.swift in Sources */,
 				02CBED6A233A007F00EF7F7F /* SignInView.swift in Sources */,
 				02AC0CCA233A5A5100521422 /* SessionStorage.swift in Sources */,
+				02A3A94A234E09D6000827AB /* MapView.swift in Sources */,
 				0242A163233E3202005F9673 /* PlayAsHumanView.swift in Sources */,
 				02CBED3923391D8800EF7F7F /* SceneDelegate.swift in Sources */,
 				0242A169233E3E0A005F9673 /* ScoreListView.swift in Sources */,
 				0242A167233E322D005F9673 /* HallOfFameView.swift in Sources */,
+				02A3A948234E048F000827AB /* GameView.swift in Sources */,
 				02AC0CCC233A5A8500521422 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

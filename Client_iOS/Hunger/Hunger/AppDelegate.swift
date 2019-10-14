@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         GMSServices.provideAPIKey("AIzaSyDkRWs6f1cBPtU2MTfEH0WPCzC6S2ed_X8")
+        
+        // TODO: Check if the device supports location services as described here: https://developer.apple.com/documentation/corelocation/adding_location_services_to_your_app?language=objc and indicate the requirement at Info.plist.
         return true
     }
 

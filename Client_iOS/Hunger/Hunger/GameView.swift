@@ -9,15 +9,23 @@
 import SwiftUI
 import UIKit
 import GoogleMaps
+import CoreLocation
 
 struct GameView: View {
+    @State var locationManager = LocationManager()
+    
     var body: some View {
-        MapView()
+        MapView(locationManager: $locationManager).onAppear {
+//            self.locationManager.startUpdating()
+            
+        }.onDisappear {
+            // TODO Stop location service
+        }
     }
 }
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        GameView(locationManager: LocationManager())
     }
 }

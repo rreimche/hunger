@@ -14,6 +14,8 @@ struct MapView: UIViewRepresentable {
     
     //@State var selfMarker = GMSMarker()
     
+    // MARK: Marker placement methods
+    
     func placeNewSelfMarker(on mapView: GMSMapView, at position: CLLocationCoordinate2D){
         let selfMarker = GMSMarker()
     
@@ -24,6 +26,23 @@ struct MapView: UIViewRepresentable {
         selfMarker.snippet = "Some Text"
         selfMarker.map = mapView
     }
+    
+    func placeNearbyPlayersMarkers(on mapView: GMSMapView){
+        for user in locationManager.nearbyPlayers {
+            guard user.location != nil else {
+                print("Warning: the user \(user.uid) has no location for marker placement, therefore no marker is placed for him.")
+                continue
+            }
+            
+            let marker = GMSMarker()
+            marker.position = user.location!.coordinate
+            marker.title = "A player"
+            marker.snippet = "Some Text"
+            marker.map = mapView
+        }
+    }
+    
+    // MARK: UIViewRepresentable
     
     func makeUIView(context: Context) -> GMSMapView {
         // TODO provide backup solution for the case lastKnownLocation = nil
@@ -46,6 +65,7 @@ struct MapView: UIViewRepresentable {
         // TODO provide backup solution for the case lastKnownLocation = nil
         mapView.clear()
         placeNewSelfMarker(on: mapView, at: self.locationManager.lastKnownLocation.coordinate)
+        placeNearbyPlayersMarkers(on: mapView)
     }
     
 }

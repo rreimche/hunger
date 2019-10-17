@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct PlayAsZombieView: View {
+    @EnvironmentObject var session : SessionStore
     var body: some View {
-        GameView()
+        GameView(locationManager: LocationManager(session: self.session))
     }
 }
 

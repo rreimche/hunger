@@ -9,9 +9,14 @@
 import Foundation
 import Combine
 import CoreLocation
+import Firebase
+import GeoFire
 
 class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     private let manager: CLLocationManager
+    private var dbRef: DatabaseReference!
+    private var geoFire: GeoFire!
+    private var session: SessionStore!
     var didChange = PassthroughSubject<LocationManager, Never>()
 
     // TODO CLLocation -> CLLocation?, no marker and appropriate message if nil
@@ -21,8 +26,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         }
     }
 
-    init(manager: CLLocationManager = CLLocationManager()) {
+    init(manager: CLLocationManager = CLLocationManager(), session: SessionStore) {
         self.manager = manager
+        self.dbRef = Database.database().reference()
+        self.geoFire = GeoFire(firebaseRef: dbRef)
+        self.session = session
         
         super.init()
         
@@ -44,9 +52,17 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         
         if let newLocation = locations.last {
             lastKnownLocation = newLocation
+            
+            // TODO Post location to firebase
+            self.dbRef.child("players-online").child(session.user!.uid).setValue(true)
+            geoFire.setLocation(lastKnownLocation, forKey: session.user!.uid){ (error) in
+                if (error != nil) {
+                    print("An error occured: \(String(describing: error))")
+                } else {
+                    print("Saved location successfully!")
+                }
+            }
         }
-        
-        // TODO Post location to firebase
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

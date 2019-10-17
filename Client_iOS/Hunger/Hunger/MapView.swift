@@ -52,7 +52,7 @@ struct MapView: UIViewRepresentable {
 
 struct MapView_Previews: PreviewProvider {
     
-    @State static var locationManager = LocationManager()
+    @State static var locationManager = LocationManager(session: SessionStore())
     
 //    init() {
 //        MapView_Previews.self.locationManager.startUpdating()

@@ -19,6 +19,8 @@ target 'Hunger' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
 
+  pod 'GeoFire', '~> 3.0'
+
   target 'HungerTests' do
     inherit! :search_paths
     # Pods for testing

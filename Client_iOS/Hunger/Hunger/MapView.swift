@@ -10,10 +10,14 @@ import SwiftUI
 import GoogleMaps
 
 struct MapView: UIViewRepresentable {
-    //@Binding var locationManager: LocationManager
+    // NOTE: To process any events triggered inside GMSMapView,
+    //       we must have a Coordinator as it's delegate (most probably...)
+    //       At least this is a case with represented UIViewControllers,
+    //       But I don't know if it's also so with UIViews.
+    
+    @Binding var locationManager: LocationManager
     //@EnvironmentObject var session: SessionStore
-    @State var locationManager: LocationManager
-    var defaultMapZoom : Float = 3.0
+    let defaultMapZoom : Float = 3.0
     
 //    init(){
 //        defaultMapZoom = 3.0
@@ -101,6 +105,6 @@ struct MapView_Previews: PreviewProvider {
 //    }
     
     static var previews: some View {
-        MapView(locationManager: LocationManager(session: SessionStore()))
+        MapView(locationManager: $locationManager)
     }
 }

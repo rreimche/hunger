@@ -12,13 +12,14 @@ import GoogleMaps
 import CoreLocation
 
 struct GameView: View {
-    @EnvironmentObject var session: SessionStore
-    // TODO? @State var locationManager: LocationManager
+    //@EnvironmentObject var session: SessionStore
+    @State var locationManager: LocationManager
+    // TODO should I call MapView.updateView from a Coordinator?
     
     
     var body: some View {
         //MapView(locationManager: $locationManager)
-        MapView(locationManager: LocationManager(session: session)).onAppear{ 
+        MapView(locationManager: $locationManager).onAppear{
             
         }.onDisappear {
             // TODO Stop location service
@@ -28,6 +29,6 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        GameView(locationManager: LocationManager(session: SessionStore()))
     }
 }

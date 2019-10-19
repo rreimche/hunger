@@ -10,7 +10,15 @@ import SwiftUI
 import GoogleMaps
 
 struct MapView: UIViewRepresentable {
-    @Binding var locationManager: LocationManager
+    //@Binding var locationManager: LocationManager
+    //@EnvironmentObject var session: SessionStore
+    @State var locationManager: LocationManager
+    var defaultMapZoom : Float = 3.0
+    
+//    init(){
+//        defaultMapZoom = 3.0
+//        locationManager = LocationManager(session: session)
+//    }
     
     //@State var selfMarker = GMSMarker()
     
@@ -42,6 +50,13 @@ struct MapView: UIViewRepresentable {
         }
     }
     
+    func updateCameraPosition(for mapView: GMSMapView){
+        mapView.animate(to: GMSCameraPosition.init(
+            target: locationManager.lastKnownLocation.coordinate,
+            zoom: defaultMapZoom
+        ))
+    }
+    
     // MARK: UIViewRepresentable
     
     func makeUIView(context: Context) -> GMSMapView {
@@ -53,18 +68,25 @@ struct MapView: UIViewRepresentable {
 //        }
         let coordinate = locationManager.lastKnownLocation.coordinate
         
-        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 3.0)
+        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: defaultMapZoom)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         
         placeNewSelfMarker(on: mapView, at: coordinate)
+        
+        // TODO Hide Map and show placeholder
         
         return mapView
     }
     
     func updateUIView(_ mapView: GMSMapView, context: Context){
         // TODO provide backup solution for the case lastKnownLocation = nil
+        print("Updating MapView")
+        
+        // TODO remove the placeholder if present
+        
         mapView.clear()
         placeNewSelfMarker(on: mapView, at: self.locationManager.lastKnownLocation.coordinate)
+        updateCameraPosition(for: mapView)
         placeNearbyPlayersMarkers(on: mapView)
     }
     
@@ -79,6 +101,6 @@ struct MapView_Previews: PreviewProvider {
 //    }
     
     static var previews: some View {
-        MapView(locationManager: $locationManager)
+        MapView(locationManager: LocationManager(session: SessionStore()))
     }
 }

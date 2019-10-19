@@ -3,10 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #1 in MainMenuView.body.getter:MainMenuView.swift">
+         contextName = "MapView.updateUIView(_:context:):MapView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "session.user">
+               value = "self.locationManager.lastKnownLocation.coordinate">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -18,6 +18,14 @@
          <PersistentStrings>
             <PersistentString
                value = "error!.localizedDescription">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MainMenuView.body.getter:MainMenuView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "session.user">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

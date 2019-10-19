@@ -13,13 +13,12 @@ import CoreLocation
 
 struct GameView: View {
     @EnvironmentObject var session: SessionStore
-    @State var locationManager: LocationManager
+    // TODO? @State var locationManager: LocationManager
+    
     
     var body: some View {
-        MapView(locationManager: $locationManager).onAppear {
-//            self.locationManager.startUpdating()
-            
-        }.onAppear{ 
+        //MapView(locationManager: $locationManager)
+        MapView(locationManager: LocationManager(session: session)).onAppear{ 
             
         }.onDisappear {
             // TODO Stop location service
@@ -29,6 +28,6 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(locationManager: LocationManager(session: SessionStore()))
+        GameView()
     }
 }

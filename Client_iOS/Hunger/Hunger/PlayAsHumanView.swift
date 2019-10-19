@@ -11,7 +11,7 @@ import SwiftUI
 struct PlayAsHumanView: View {
     @EnvironmentObject var session : SessionStore
     var body: some View {
-        GameView(locationManager: LocationManager(session: self.session))
+        GameView()
     }
 }
 

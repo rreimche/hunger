@@ -28,9 +28,25 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     var didChange = PassthroughSubject<LocationManager, Never>()
 
     // TODO CLLocation -> CLLocation?, no marker and appropriate message if nil
-    var lastKnownLocation: CLLocation = CLLocation(latitude: 0, longitude: 0) {
+    var lastKnownLocation: CLLocation {
         didSet {
+            
+            // Post location to firebase.
+            self.dbRef.child(databasePath).child(session.user!.uid).setValue(true)
+            geoFire.setLocation(lastKnownLocation, forKey: session.user!.uid){ (error) in
+                if (error != nil) {
+                    print("An error occured: \(String(describing: error))")
+                } else {
+                    print("Saved new location of the local player to firebase successfully.")
+                }
+            }
+            
+            // Update circleQuery.
+            self.circleQuery.center = self.lastKnownLocation
+            
+            // Propagate the update to the observers.
             didChange.send(self)
+            print("Finished propagating lastKnownLocation to the observers.")
         }
     }
     
@@ -43,10 +59,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     // MARK: INIT
     
     init(manager: CLLocationManager = CLLocationManager(), session: SessionStore) {
+        
         self.manager = manager
         self.dbRef = Database.database().reference()
         self.geoFire = GeoFire(firebaseRef: dbRef)
         self.session = session
+        self.lastKnownLocation = CLLocation(latitude: 0, longitude: 0)
         
         super.init()
         
@@ -59,7 +77,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         self.circleQuery = self.geoFire.query(at: lastKnownLocation, withRadius: 0.6)
 
         // Set event processors for the events of other players entering and leayving
-        // the nearby zone and for moving in it
+        // the nearby zone and for moving inside of it.
         let gfEventProcessors : Dictionary<GFEventType, gfEventProcessor> =
             [.keyEntered : keyEnteredProceessor(key:location:),
              .keyMoved : keyMovedProcessor(key:location:),
@@ -81,20 +99,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         //print(locations)
         
+        
         if let newLocation = locations.last {
+            print("Location of the local player was updated: \(String(describing: newLocation))")
+            
             lastKnownLocation = newLocation
-            
-            // Post location to firebase
-            self.dbRef.child(databasePath).child(session.user!.uid).setValue(true)
-            geoFire.setLocation(lastKnownLocation, forKey: session.user!.uid){ (error) in
-                if (error != nil) {
-                    print("An error occured: \(String(describing: error))")
-                } else {
-                    print("Saved location successfully!")
-                }
-            }
-            
-            // TODO Update circleQuery
+  
         }
         
     }
@@ -110,7 +120,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     typealias gfEventProcessor = (String, CLLocation) -> ()
     
     func keyEnteredProceessor(key: String, location: CLLocation) -> () {
-        print("Key '\(String(describing: key))' entered the search area and is at location '\(String(describing: location))'")
+        print("Player with uid (key) '\(String(describing: key))' entered the search area and is at location '\(String(describing: location))'")
         
         let uid = key
 
@@ -120,7 +130,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     }
     
     func keyExitedProcessor(key: String, location: CLLocation) -> () {
-        print("Key '\(String(describing: key))' exited the search area and is at location '\(String(describing: location))'")
+        print("Player with uid (key) '\(String(describing: key))' exited the search area and is at location '\(String(describing: location))'")
 
         let uid = key
 
@@ -130,13 +140,23 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     }
     
     func keyMovedProcessor(key: String, location: CLLocation) -> () {
-        print("Key '\(String(describing: key))' moved in the search area and is at location '\(String(describing: location))'")
+        
 
         let uid = key
+        
+        switch uid == session.user!.uid {
+        case true:
+            print("The .keyMoved fired on the local user, nothing to do.")
+            
+        case false:
+            print("Player with uid (key) '\(String(describing: key))' moved in the search area and is at location '\(String(describing: location))'")
+            
+            let user = User(uid: uid, displayName: nil, email: nil, location: location)
 
-        let user = User(uid: uid, displayName: nil, email: nil, location: location)
+            self.nearbyPlayers.update(with: user)
+        }
 
-        self.nearbyPlayers.update(with: user)
+        
     }
 
 // TODO remove

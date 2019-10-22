@@ -15,9 +15,10 @@ struct MapView: UIViewRepresentable {
     //       At least this is a case with represented UIViewControllers,
     //       But I don't know if it's also so with UIViews.
     
-    @Binding var locationManager: LocationManager
-    //@EnvironmentObject var session: SessionStore
+    @ObservedObject var locationManager: LocationManager
+    @EnvironmentObject var session: SessionStore
     let defaultMapZoom : Float = 3.0
+    
     
 //    init(){
 //        defaultMapZoom = 3.0
@@ -40,12 +41,13 @@ struct MapView: UIViewRepresentable {
     }
     
     func placeNearbyPlayersMarkers(on mapView: GMSMapView){
-        for user in locationManager.nearbyPlayers {
+        for (user, _) in locationManager.nearbyPlayers {
             guard user.location != nil else {
-                print("Warning: the user \(user.uid) has no location for marker placement, therefore no marker is placed for him.")
+                print("Warning: the user \(user.uid) has either no location for marker placement, therefore no marker is placed for him.")
                 continue
             }
             
+            // Place marker
             let marker = GMSMarker()
             marker.position = user.location!.coordinate
             marker.title = "A player"
@@ -98,13 +100,13 @@ struct MapView: UIViewRepresentable {
 
 struct MapView_Previews: PreviewProvider {
     
-    @State static var locationManager = LocationManager(session: SessionStore())
+    @ObservedObject static var locationManager = LocationManager(session: SessionStore())
     
 //    init() {
 //        MapView_Previews.self.locationManager.startUpdating()
 //    }
     
     static var previews: some View {
-        MapView(locationManager: $locationManager)
+        MapView(locationManager: locationManager)
     }
 }

@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0214E144235F4918000F92D4 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214E143235F4918000F92D4 /* GameOverView.swift */; };
 		0242A163233E3202005F9673 /* PlayAsHumanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A162233E3202005F9673 /* PlayAsHumanView.swift */; };
 		0242A165233E321C005F9673 /* PlayAsZombieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A164233E321C005F9673 /* PlayAsZombieView.swift */; };
 		0242A167233E322D005F9673 /* HallOfFameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A166233E322D005F9673 /* HallOfFameView.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0214E143235F4918000F92D4 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		0242A162233E3202005F9673 /* PlayAsHumanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAsHumanView.swift; sourceTree = "<group>"; };
 		0242A164233E321C005F9673 /* PlayAsZombieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAsZombieView.swift; sourceTree = "<group>"; };
 		0242A166233E322D005F9673 /* HallOfFameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HallOfFameView.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				0242A166233E322D005F9673 /* HallOfFameView.swift */,
 				0242A168233E3E0A005F9673 /* ScoreListView.swift */,
 				0274685B235382E6002C09F4 /* LocationManager.swift */,
+				0214E143235F4918000F92D4 /* GameOverView.swift */,
 				02CBED3F23391D8B00EF7F7F /* Assets.xcassets */,
 				02CBED4423391D8B00EF7F7F /* LaunchScreen.storyboard */,
 				02CBED4723391D8B00EF7F7F /* Info.plist */,
@@ -487,6 +490,7 @@
 				0242A169233E3E0A005F9673 /* ScoreListView.swift in Sources */,
 				0242A167233E322D005F9673 /* HallOfFameView.swift in Sources */,
 				02A3A948234E048F000827AB /* GameView.swift in Sources */,
+				0214E144235F4918000F92D4 /* GameOverView.swift in Sources */,
 				02AC0CCC233A5A8500521422 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

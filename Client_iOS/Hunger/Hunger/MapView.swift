@@ -10,6 +10,8 @@ import SwiftUI
 import GoogleMaps
 
 struct MapView: UIViewRepresentable {
+    let playAs: PlayAs
+    
     // NOTE: To process any events triggered inside GMSMapView,
     //       we must have a Coordinator as it's delegate (most probably...)
     //       At least this is a case with represented UIViewControllers,
@@ -30,6 +32,7 @@ struct MapView: UIViewRepresentable {
     // MARK: Marker placement methods
     
     func placeNewSelfMarker(on mapView: GMSMapView, at position: CLLocationCoordinate2D){
+        
         let selfMarker = GMSMarker()
     
         // Creates a marker in the center of the map.
@@ -37,9 +40,11 @@ struct MapView: UIViewRepresentable {
         selfMarker.position = position
         selfMarker.title = "Me"
         selfMarker.snippet = "Some Text"
+        selfMarker.iconView = markerIconView(for: .human)
         selfMarker.map = mapView
     }
     
+    // TODO: differentiate between other zombies and other humans
     func placeNearbyPlayersMarkers(on mapView: GMSMapView){
         for (user, _) in locationManager.nearbyPlayers {
             guard user.location != nil else {
@@ -52,6 +57,7 @@ struct MapView: UIViewRepresentable {
             marker.position = user.location!.coordinate
             marker.title = "A player"
             marker.snippet = "Some Text"
+            marker.iconView = markerIconView(for: .zombie)
             marker.map = mapView
         }
     }
@@ -61,6 +67,28 @@ struct MapView: UIViewRepresentable {
             target: locationManager.lastKnownLocation.coordinate,
             zoom: defaultMapZoom
         ))
+    }
+    
+    func markerIconView(for playerType: PlayAs) -> UIView {
+        let child = UIHostingController(rootView: MarkerIconView(iconFor: playerType))
+        let parent = UIViewController()
+        let size = CGSize(width: 10, height: 10)
+        parent.preferredContentSize = size
+        child.view.translatesAutoresizingMaskIntoConstraints = false
+        child.view.frame = parent.view.bounds
+        // First, add the view of the child to the view of the parent
+        parent.view.addSubview(child.view)
+        // Then, add the child to the parent
+        parent.addChild(child)
+        parent.view.frame.size = size
+        
+        return parent.view
+        
+        /*// Then, remove the child from its parent
+        child.removeFromParent()
+
+        // Finally, remove the child’s view from the parent’s
+        child.view.removeFromSuperview()*/
     }
     
     // MARK: UIViewRepresentable
@@ -107,6 +135,6 @@ struct MapView_Previews: PreviewProvider {
 //    }
     
     static var previews: some View {
-        MapView(locationManager: locationManager)
+        MapView(playAs: .zombie, locationManager: locationManager)
     }
 }

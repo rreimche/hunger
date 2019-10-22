@@ -141,17 +141,25 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     typealias gfEventProcessor = (String, CLLocation) -> ()
     
     func keyEnteredProceessor(key uid: String, anotherUserLocation: CLLocation) -> () {
-        print("Player with uid (key) '\(String(describing: uid))' entered the search area and is at location '\(String(describing: anotherUserLocation))'")
-
-        let anotherUser = User(uid: uid, displayName: nil, email: nil, location: anotherUserLocation)
-        let distanceToUser = lastKnownLocation.distance(from: anotherUserLocation)
         
-        if distanceToUser.isLessThanOrEqualTo(collisionDistance) {
-            print("Local user \(session.user!.uid) and another user \(anotherUser.uid) have collided.")
-            collisionHappened = true
+        switch uid == session.user!.uid {
+        case true:
+            print("The .keyEntered fired on the local user, nothing to do.")
+        case false:
+            print("Player with uid (key) '\(String(describing: uid))' entered the search area and is at location '\(String(describing: anotherUserLocation))'")
+
+            let anotherUser = User(uid: uid, displayName: nil, email: nil, location: anotherUserLocation)
+            let distanceToUser = lastKnownLocation.distance(from: anotherUserLocation)
+            
+            if distanceToUser.isLessThanOrEqualTo(collisionDistance) {
+                print("Local user \(session.user!.uid) and another user \(anotherUser.uid) have collided.")
+                collisionHappened = true
+            }
+            
+            self.nearbyPlayers.updateValue(distanceToUser, forKey: anotherUser)
         }
         
-        self.nearbyPlayers.updateValue(distanceToUser, forKey: anotherUser)
+        
     }
     
     func keyExitedProcessor(key uid: String, anotherUserLocation: CLLocation) -> () {
@@ -173,6 +181,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
             
             let anotherUser = User(uid: uid, displayName: nil, email: nil, location: anotherUserLocation)
             let distanceToUser = lastKnownLocation.distance(from: anotherUserLocation)
+            
+            
+            if distanceToUser.isLessThanOrEqualTo(collisionDistance) {
+                print("Local user \(session.user!.uid) and another user \(anotherUser.uid) have collided.")
+                collisionHappened = true
+            }
 
             self.nearbyPlayers.updateValue(distanceToUser, forKey: anotherUser)
         }

@@ -29,6 +29,7 @@ class User: Hashable {
     var email: String?
     var displayName: String?
     var location: CLLocation?
+    var playsAs : PlayAs?
 
     init(uid: String, displayName: String?, email: String?, location: CLLocation? = nil) {
         self.uid = uid

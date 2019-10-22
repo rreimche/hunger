@@ -12,6 +12,10 @@ import GoogleMaps
 import CoreLocation
 
 struct GameView: View {
+    
+    // If the player would play as a Zombie or as a Human
+    let playAs: PlayAs
+    
     //@EnvironmentObject var session: SessionStore
     @ObservedObject var locationManager: LocationManager
     // TODO should I call MapView.updateView from a Coordinator?
@@ -23,11 +27,10 @@ struct GameView: View {
     var collisionHappened = false
     
     @ViewBuilder
-    var body: some View {
-        //MapView(locationManager: $locationManager)
-        if( locationManager.collisionHappened == false ){
+    var body: some View { 
+        if( !locationManager.collisionHappened ){
             
-            MapView(locationManager: locationManager)
+            MapViewMK(playAs: self.playAs, locationManager: locationManager)
                  .onAppear{
             
                 }.onDisappear {
@@ -42,6 +45,6 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(locationManager: LocationManager(session: SessionStore()))
+        GameView(playAs: .zombie, locationManager: LocationManager(session: SessionStore()))
     }
 }

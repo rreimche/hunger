@@ -11,6 +11,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "GameView.body.getter:GameView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "!locationManager.collisionHappened">
+            </PersistentString>
+            <PersistentString
+               value = "locationManager.collisionHappened">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in SignInView.body.getter:SignInView.swift">
       </ContextState>
       <ContextState

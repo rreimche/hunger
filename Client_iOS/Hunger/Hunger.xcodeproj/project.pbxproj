@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0214E144235F4918000F92D4 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214E143235F4918000F92D4 /* GameOverView.swift */; };
-		0242A163233E3202005F9673 /* PlayAsHumanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A162233E3202005F9673 /* PlayAsHumanView.swift */; };
-		0242A165233E321C005F9673 /* PlayAsZombieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A164233E321C005F9673 /* PlayAsZombieView.swift */; };
+		0214E146235F517E000F92D4 /* MarkerIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214E145235F517E000F92D4 /* MarkerIconView.swift */; };
+		0214E148235F5288000F92D4 /* PlayAs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214E147235F5288000F92D4 /* PlayAs.swift */; };
+		0214E18A235F7762000F92D4 /* MapViewMK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214E189235F7762000F92D4 /* MapViewMK.swift */; };
 		0242A167233E322D005F9673 /* HallOfFameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A166233E322D005F9673 /* HallOfFameView.swift */; };
 		0242A169233E3E0A005F9673 /* ScoreListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A168233E3E0A005F9673 /* ScoreListView.swift */; };
+		0265B546235F8FB600F720FE /* MKMapViewDelegateForPlayerMarkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265B545235F8FB600F720FE /* MKMapViewDelegateForPlayerMarkers.swift */; };
+		0265B54A235F903500F720FE /* MKAnnotationForPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265B549235F903500F720FE /* MKAnnotationForPlayers.swift */; };
 		0274685C235382E6002C09F4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274685B235382E6002C09F4 /* LocationManager.swift */; };
 		02A3A948234E048F000827AB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3A947234E048F000827AB /* GameView.swift */; };
 		02A3A94A234E09D6000827AB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3A949234E09D6000827AB /* MapView.swift */; };
@@ -53,10 +56,13 @@
 
 /* Begin PBXFileReference section */
 		0214E143235F4918000F92D4 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
-		0242A162233E3202005F9673 /* PlayAsHumanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAsHumanView.swift; sourceTree = "<group>"; };
-		0242A164233E321C005F9673 /* PlayAsZombieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAsZombieView.swift; sourceTree = "<group>"; };
+		0214E145235F517E000F92D4 /* MarkerIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerIconView.swift; sourceTree = "<group>"; };
+		0214E147235F5288000F92D4 /* PlayAs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAs.swift; sourceTree = "<group>"; };
+		0214E189235F7762000F92D4 /* MapViewMK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewMK.swift; sourceTree = "<group>"; };
 		0242A166233E322D005F9673 /* HallOfFameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HallOfFameView.swift; sourceTree = "<group>"; };
 		0242A168233E3E0A005F9673 /* ScoreListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreListView.swift; sourceTree = "<group>"; };
+		0265B545235F8FB600F720FE /* MKMapViewDelegateForPlayerMarkers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewDelegateForPlayerMarkers.swift; sourceTree = "<group>"; };
+		0265B549235F903500F720FE /* MKAnnotationForPlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKAnnotationForPlayers.swift; sourceTree = "<group>"; };
 		0274685B235382E6002C09F4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		02A3A947234E048F000827AB /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		02A3A949234E09D6000827AB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -151,14 +157,17 @@
 				02AC0CC9233A5A5100521422 /* SessionStorage.swift */,
 				02AC0CCB233A5A8500521422 /* User.swift */,
 				02AC0CD1233A66AF00521422 /* MainMenuView.swift */,
-				0242A162233E3202005F9673 /* PlayAsHumanView.swift */,
-				0242A164233E321C005F9673 /* PlayAsZombieView.swift */,
 				02A3A947234E048F000827AB /* GameView.swift */,
 				02A3A949234E09D6000827AB /* MapView.swift */,
+				0214E189235F7762000F92D4 /* MapViewMK.swift */,
+				0265B549235F903500F720FE /* MKAnnotationForPlayers.swift */,
+				0265B545235F8FB600F720FE /* MKMapViewDelegateForPlayerMarkers.swift */,
 				0242A166233E322D005F9673 /* HallOfFameView.swift */,
 				0242A168233E3E0A005F9673 /* ScoreListView.swift */,
 				0274685B235382E6002C09F4 /* LocationManager.swift */,
 				0214E143235F4918000F92D4 /* GameOverView.swift */,
+				0214E145235F517E000F92D4 /* MarkerIconView.swift */,
+				0214E147235F5288000F92D4 /* PlayAs.swift */,
 				02CBED3F23391D8B00EF7F7F /* Assets.xcassets */,
 				02CBED4423391D8B00EF7F7F /* LaunchScreen.storyboard */,
 				02CBED4723391D8B00EF7F7F /* Info.plist */,
@@ -476,16 +485,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0214E18A235F7762000F92D4 /* MapViewMK.swift in Sources */,
 				02CBED3C23391D8800EF7F7F /* Hunger.xcdatamodeld in Sources */,
 				02CBED3723391D8800EF7F7F /* AppDelegate.swift in Sources */,
+				0214E146235F517E000F92D4 /* MarkerIconView.swift in Sources */,
 				0274685C235382E6002C09F4 /* LocationManager.swift in Sources */,
 				02CBED3E23391D8800EF7F7F /* ContentView.swift in Sources */,
 				02AC0CD2233A66AF00521422 /* MainMenuView.swift in Sources */,
-				0242A165233E321C005F9673 /* PlayAsZombieView.swift in Sources */,
+				0214E148235F5288000F92D4 /* PlayAs.swift in Sources */,
 				02CBED6A233A007F00EF7F7F /* SignInView.swift in Sources */,
+				0265B546235F8FB600F720FE /* MKMapViewDelegateForPlayerMarkers.swift in Sources */,
 				02AC0CCA233A5A5100521422 /* SessionStorage.swift in Sources */,
+				0265B54A235F903500F720FE /* MKAnnotationForPlayers.swift in Sources */,
 				02A3A94A234E09D6000827AB /* MapView.swift in Sources */,
-				0242A163233E3202005F9673 /* PlayAsHumanView.swift in Sources */,
 				02CBED3923391D8800EF7F7F /* SceneDelegate.swift in Sources */,
 				0242A169233E3E0A005F9673 /* ScoreListView.swift in Sources */,
 				0242A167233E322D005F9673 /* HallOfFameView.swift in Sources */,

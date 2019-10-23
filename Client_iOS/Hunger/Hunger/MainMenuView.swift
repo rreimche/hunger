@@ -37,8 +37,8 @@ struct MainMenuView: View {
         NavigationView {
             Form {
                 Section(header: Text("Play as")) {
-                    NavigationLink(destination: GameView(playAs: .human, locationManager: LocationManager(session: session))){ Text("👩🏻‍💼🙎🏻‍♂️").font(.largeTitle).multilineTextAlignment(.center) }
-                    NavigationLink(destination: GameView(playAs: .zombie, locationManager: LocationManager(session: session))){ Text("🧟‍♀️🧟‍♂️").font(.largeTitle).multilineTextAlignment(.center) }
+                    NavigationLink(destination: GameView(playAs: .human, locationManager: LocationManager(session: session))){ Text("👩🏻‍💼").font(.largeTitle).multilineTextAlignment(.center) }
+                    NavigationLink(destination: GameView(playAs: .zombie, locationManager: LocationManager(session: session))){ Text("🧟‍♀️").font(.largeTitle).multilineTextAlignment(.center) }
                 }
                 
                 Section{

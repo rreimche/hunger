@@ -9,9 +9,11 @@
 import Foundation
 import MapKit
 
+// TODO make marker backgrounds transparent
 class MKMapViewDelegateForPlayerMarkers: NSObject, MKMapViewDelegate {
     var playsAs : PlayAs?
     
+    // TODO find a way for playsAs to be constantly set at init
     func setPlayerType(playsAs: PlayAs){
         self.playsAs = playsAs
     }

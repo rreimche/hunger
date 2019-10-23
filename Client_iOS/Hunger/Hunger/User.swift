@@ -23,6 +23,7 @@ class User: Hashable {
         hasher.combine(self.email)
         hasher.combine(self.displayName)
         hasher.combine(self.location)
+        hasher.combine(self.playsAs)
     }
     
     var uid: String
@@ -31,11 +32,12 @@ class User: Hashable {
     var location: CLLocation?
     var playsAs : PlayAs?
 
-    init(uid: String, displayName: String?, email: String?, location: CLLocation? = nil) {
+    init(uid: String, displayName: String?, email: String?, location: CLLocation? = nil, playsAs: PlayAs? = nil) {
         self.uid = uid
         self.email = email
         self.displayName = displayName
         self.location = location
+        self.playsAs = playsAs
     }
 
 }

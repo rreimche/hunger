@@ -17,13 +17,7 @@ struct MapViewMK: UIViewRepresentable {
     @EnvironmentObject var session: SessionStore
     let defaultMapZoom : Float = 3.0
     
-    
-//    init(){
-//        defaultMapZoom = 3.0
-//        locationManager = LocationManager(session: session)
-//    }
-    
-    //@State var selfMarker = GMSMarker()
+     
     
     // MARK: Marker placement methods
     
@@ -81,11 +75,12 @@ struct MapViewMK: UIViewRepresentable {
     func updateUIView(_ mapView: MKMapView, context: Context){
         
         print("Updating MapViewMK")
-        //mapView.setCenter(locationManager.lastKnownLocation.coordinate, animated: true)
         
+        // TODO add smarter updating of the markers – change positions instead of replacing
         mapView.removeAnnotations(otherPlayersMarkers)
         for (user, _) in locationManager.nearbyPlayers {
-            mapView.addAnnotation(MKAnnotationForPlayers(playsAs: user.playsAs!, coordinate: user.location!.coordinate ))
+           //TODO take playAs from user
+            mapView.addAnnotation(MKAnnotationForPlayers(playsAs: .zombie, coordinate: user.location!.coordinate ))
         }
     }
      

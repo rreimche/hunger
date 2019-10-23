@@ -3,10 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "MapView.updateUIView(_:context:):MapView.swift">
+         contextName = "LocationManager.locationManager(_:didUpdateLocations:):LocationManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.locationManager.lastKnownLocation.coordinate">
+               value = "session.user!">
+            </PersistentString>
+            <PersistentString
+               value = "session.user!.playsAs">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -18,6 +21,14 @@
             </PersistentString>
             <PersistentString
                value = "locationManager.collisionHappened">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MapView.updateUIView(_:context:):MapView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.locationManager.lastKnownLocation.coordinate">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -37,6 +48,22 @@
          <PersistentStrings>
             <PersistentString
                value = "session.user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in LocationManager.keyEnteredProcessor(key:enteredUserLocation:):LocationManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "snapshot.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MapViewMK.updateUIView(_:context:):MapViewMK.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.locationManager.nearbyPlayers">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -13,9 +13,19 @@ struct MapViewMK: UIViewRepresentable {
     let playAs: PlayAs
     var otherPlayersMarkers: [MKAnnotation] = []
     let mapViewDelegate: MKMapViewDelegateForPlayerMarkers = MKMapViewDelegateForPlayerMarkers()
-    @ObservedObject var locationManager: LocationManager
+    @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var session: SessionStore
-    let defaultMapZoom : Float = 3.0
+    let defaultMapZoom : Float = 300.0
+    let mapView: MKMapView
+    
+    func startTrackingUser(){
+        self.mapView.setUserTrackingMode(.follow, animated: true)
+    }
+    
+    init(playAs: PlayAs){
+        self.playAs = playAs
+        self.mapView = MKMapView()
+    }
     
      
     
@@ -47,8 +57,9 @@ struct MapViewMK: UIViewRepresentable {
     // MARK: UIViewRepresentable
     
     func makeUIView(context: Context) -> MKMapView {
-        let mapView = MKMapView()
-        let startingRegion = MKCoordinateRegion(center: locationManager.lastKnownLocation.coordinate, latitudinalMeters: 200, longitudinalMeters: 200)
+        
+        let startingLocation = locationManager.lastKnownLocation ?? locationManager.defaultStartingLocation
+        let startingRegion = MKCoordinateRegion(center: startingLocation.coordinate, latitudinalMeters: 200, longitudinalMeters: 200)
         
         /*let leftMargin:CGFloat = 10
         let topMargin:CGFloat = 60
@@ -57,14 +68,15 @@ struct MapViewMK: UIViewRepresentable {
         
         mapView.frame = CGRect(x: leftMargin, y: topMargin, width: mapWidth, height: mapHeight)*/
         
-        mapView.mapType = .standard
+        mapView.mapType = .mutedStandard
+        //mapView.setRegion(startingRegion, animated: true)
+        //mapView.setCameraZoomRange(MKMapView.CameraZoomRange(minCenterCoordinateDistance: CLLocationDistance(defaultMapZoom), maxCenterCoordinateDistance: CLLocationDistance(defaultMapZoom)), animated: true)
+        mapView.delegate = self.mapViewDelegate
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
         mapView.showsUserLocation = true
-        mapView.setRegion(startingRegion, animated: true)
-        //mapView.setUserTrackingMode(.follow, animated: true) //.followWithHeading
         self.mapViewDelegate.setPlayerType(playsAs: self.playAs)
-        mapView.delegate = self.mapViewDelegate
+        
         
         
         //mapView.center = view.center
@@ -95,6 +107,6 @@ struct MapViewMK_Previews: PreviewProvider {
 //    }
     
     static var previews: some View {
-        MapViewMK(playAs: .zombie, locationManager: locationManager)
+        MapViewMK(playAs: .zombie)
     }
 }

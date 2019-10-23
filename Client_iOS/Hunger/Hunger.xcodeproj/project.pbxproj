@@ -13,6 +13,7 @@
 		0214E18A235F7762000F92D4 /* MapViewMK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214E189235F7762000F92D4 /* MapViewMK.swift */; };
 		0242A167233E322D005F9673 /* HallOfFameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A166233E322D005F9673 /* HallOfFameView.swift */; };
 		0242A169233E3E0A005F9673 /* ScoreListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242A168233E3E0A005F9673 /* ScoreListView.swift */; };
+		02597D4E2360B274005F6D74 /* UserTrackingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02597D4D2360B274005F6D74 /* UserTrackingButtonView.swift */; };
 		0265B546235F8FB600F720FE /* MKMapViewDelegateForPlayerMarkers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265B545235F8FB600F720FE /* MKMapViewDelegateForPlayerMarkers.swift */; };
 		0265B54A235F903500F720FE /* MKAnnotationForPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0265B549235F903500F720FE /* MKAnnotationForPlayers.swift */; };
 		0274685C235382E6002C09F4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274685B235382E6002C09F4 /* LocationManager.swift */; };
@@ -61,6 +62,7 @@
 		0214E189235F7762000F92D4 /* MapViewMK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewMK.swift; sourceTree = "<group>"; };
 		0242A166233E322D005F9673 /* HallOfFameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HallOfFameView.swift; sourceTree = "<group>"; };
 		0242A168233E3E0A005F9673 /* ScoreListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreListView.swift; sourceTree = "<group>"; };
+		02597D4D2360B274005F6D74 /* UserTrackingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTrackingButtonView.swift; sourceTree = "<group>"; };
 		0265B545235F8FB600F720FE /* MKMapViewDelegateForPlayerMarkers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewDelegateForPlayerMarkers.swift; sourceTree = "<group>"; };
 		0265B549235F903500F720FE /* MKAnnotationForPlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKAnnotationForPlayers.swift; sourceTree = "<group>"; };
 		0274685B235382E6002C09F4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				02A3A947234E048F000827AB /* GameView.swift */,
 				02A3A949234E09D6000827AB /* MapView.swift */,
 				0214E189235F7762000F92D4 /* MapViewMK.swift */,
+				02597D4D2360B274005F6D74 /* UserTrackingButtonView.swift */,
 				0265B549235F903500F720FE /* MKAnnotationForPlayers.swift */,
 				0265B545235F8FB600F720FE /* MKMapViewDelegateForPlayerMarkers.swift */,
 				0242A166233E322D005F9673 /* HallOfFameView.swift */,
@@ -485,6 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02597D4E2360B274005F6D74 /* UserTrackingButtonView.swift in Sources */,
 				0214E18A235F7762000F92D4 /* MapViewMK.swift in Sources */,
 				02CBED3C23391D8800EF7F7F /* Hunger.xcdatamodeld in Sources */,
 				02CBED3723391D8800EF7F7F /* AppDelegate.swift in Sources */,

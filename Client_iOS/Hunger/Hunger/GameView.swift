@@ -15,9 +15,10 @@ struct GameView: View {
     
     // If the player would play as a Zombie or as a Human
     let playAs: PlayAs
+    let mapViewMK: MapViewMK
     
     @EnvironmentObject var session: SessionStore
-    @ObservedObject var locationManager: LocationManager
+    @EnvironmentObject var locationManager: LocationManager
     // TODO should I call MapView.updateView from a Coordinator?
     
     
@@ -26,26 +27,32 @@ struct GameView: View {
     
     var collisionHappened = false
     
-//    init(playAs: PlayAs){
-//        self.playAs = playAs
-//        self.locationManager = locationManager(session:session)
-//    }
+    init(playAs: PlayAs){
+        self.playAs = playAs
+        self.mapViewMK = MapViewMK(playAs: playAs)
+    }
     
     @ViewBuilder
     var body: some View { 
         if( !locationManager.collisionHappened ){
-            // TODO find a way for LocationManager to start providing locations only when .startUpdatingLocations() is called.
-            MapViewMK(playAs: self.playAs, locationManager: locationManager)
-                 .onAppear{
+            ZStack(alignment: Alignment.bottomTrailing){
+                // TODO find a way for LocationManager to start providing locations only when .startUpdatingLocations() is called.
+                mapViewMK.onAppear{
                     self.session.user!.playsAs = self.playAs
                     self.locationManager.startUpdatingLocations()
                     print("Started updating locations.")
+                    //self.mapViewMK.startTrackingUser()
                 }.onDisappear {
-                // TODO Stop location service
                     self.locationManager.stopUpdatingLocations()
                     self.session.user!.playsAs = nil
                     print("Stopped updating locations.")
                 }
+                UserTrackingButtonView(mapView: mapViewMK.mapView)
+                    .frame(width: 40, height: 40)
+                    .cornerRadius(20)
+                    .offset(x: -20, y: -20)
+            
+            }
             
         } else {
             GameOverView()
@@ -55,6 +62,6 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(playAs: .zombie, locationManager: LocationManager(session: SessionStore()))
+        GameView(playAs: .zombie)
     }
 }

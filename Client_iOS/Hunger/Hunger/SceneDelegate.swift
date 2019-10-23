@@ -25,7 +25,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         // let loginView = SignInView().environment(\.managedObjectContext, context).environmentObject(SessionStore())
-        let startView = ContentView().environment(\.managedObjectContext, context).environmentObject(SessionStore())
+        let session = SessionStore()
+        let locationManager = LocationManager(session: session)
+        let startView = ContentView().environment(\.managedObjectContext, context).environmentObject(session).environmentObject(locationManager)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

@@ -41,10 +41,9 @@ class MKMapViewDelegateForPlayerMarkers: NSObject, MKMapViewDelegate {
             let markerView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "userLocationAnnotation")
             markerView.canShowCallout = true
             
-            switch self.playsAs {
+            switch self.playsAs! {
             case .human: markerView.glyphText = "👩🏻‍💼"
-            case .zombie: markerView.glyphText = "🧟‍♀️"
-            default: return nil
+            case .zombie: markerView.glyphText = "🧟‍♀️" 
             }
             
             return markerView
@@ -53,4 +52,13 @@ class MKMapViewDelegateForPlayerMarkers: NSObject, MKMapViewDelegate {
         return nil
         
     }
+    
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+        mapView.setUserTrackingMode(.follow, animated: true) //.followWithHeading
+    }
+    
+//    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, _: Bool) {
+//        mapView.setUserTrackingMode(.follow, animated: true) //.followWithHeading
+//    }
+    
 }

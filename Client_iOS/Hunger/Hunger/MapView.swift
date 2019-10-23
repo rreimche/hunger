@@ -64,7 +64,7 @@ struct MapView: UIViewRepresentable {
     
     func updateCameraPosition(for mapView: GMSMapView){
         mapView.animate(to: GMSCameraPosition.init(
-            target: locationManager.lastKnownLocation.coordinate,
+            target: locationManager.lastKnownLocation!.coordinate,
             zoom: defaultMapZoom
         ))
     }
@@ -100,7 +100,7 @@ struct MapView: UIViewRepresentable {
 //        } else {
 //            let coordinate = CLLocationCoordinate2D(latitude: 0,longitude: 0)
 //        }
-        let coordinate = locationManager.lastKnownLocation.coordinate
+        let coordinate = locationManager.lastKnownLocation!.coordinate
         
         let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: defaultMapZoom)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
@@ -119,7 +119,7 @@ struct MapView: UIViewRepresentable {
         // TODO remove the placeholder if present
         
         mapView.clear()
-        placeNewSelfMarker(on: mapView, at: self.locationManager.lastKnownLocation.coordinate)
+        placeNewSelfMarker(on: mapView, at: self.locationManager.lastKnownLocation!.coordinate)
         updateCameraPosition(for: mapView)
         placeNearbyPlayersMarkers(on: mapView)
     }

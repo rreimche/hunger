@@ -14,7 +14,7 @@ import CoreLocation
 struct GameView: View {
     
     // If the player would play as a Zombie or as a Human
-    let playAs: PlayAs
+    let playsAs: PlayAs
     let mapViewMK: MapViewMK
     
     @EnvironmentObject var session: SessionStore
@@ -28,17 +28,17 @@ struct GameView: View {
     var collisionHappened = false
     
     init(playAs: PlayAs){
-        self.playAs = playAs
+        self.playsAs = playAs
         self.mapViewMK = MapViewMK(playAs: playAs)
     }
     
     @ViewBuilder
     var body: some View { 
-        if( !locationManager.collisionHappened ){
+        if( !(locationManager.zombieCollidedWithHuman && self.playsAs == .human) ){
             ZStack(alignment: Alignment.bottomTrailing){
                 // TODO find a way for LocationManager to start providing locations only when .startUpdatingLocations() is called.
                 mapViewMK.onAppear{
-                    self.session.user!.playsAs = self.playAs
+                    self.session.user!.playsAs = self.playsAs
                     self.locationManager.startUpdatingLocations()
                     print("Started updating locations.")
                     //self.mapViewMK.startTrackingUser()

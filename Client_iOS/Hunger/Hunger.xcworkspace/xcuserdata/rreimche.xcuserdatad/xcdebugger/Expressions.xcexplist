@@ -6,10 +6,16 @@
          contextName = "LocationManager.locationManager(_:didUpdateLocations:):LocationManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "session.user!">
+               value = "self.circleQuery!.center.coordinate.longitude">
             </PersistentString>
             <PersistentString
-               value = "session.user!.playsAs">
+               value = "self.circleQuery">
+            </PersistentString>
+            <PersistentString
+               value = "self.circleQuery!.center.coordinate.latitude">
+            </PersistentString>
+            <PersistentString
+               value = "self.nearbyPlayers">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -44,14 +50,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in MainMenuView.body.getter:MainMenuView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "session.user">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "closure #1 in LocationManager.keyEnteredProcessor(key:enteredUserLocation:):LocationManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -60,10 +58,48 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in MainMenuView.body.getter:MainMenuView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "session.user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LocationManager.keyExitedProcessor(key:exitedUserLocation:):LocationManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.nearbyPlayers">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LocationManager.keyMovedProcessor(key:movedUserLocation:):LocationManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.nearbyPlayers">
+            </PersistentString>
+            <PersistentString
+               value = "uid == session.user!.uid">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "MapViewMK.updateUIView(_:context:):MapViewMK.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.locationManager.nearbyPlayers">
+               value = "self.locationManager.store.circleQuery.centerLocation">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LocationManager.keyEnteredProcessor(key:enteredUserLocation:):LocationManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "enteredUid == session.user!.uid">
+            </PersistentString>
+            <PersistentString
+               value = "session.user!.uid">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

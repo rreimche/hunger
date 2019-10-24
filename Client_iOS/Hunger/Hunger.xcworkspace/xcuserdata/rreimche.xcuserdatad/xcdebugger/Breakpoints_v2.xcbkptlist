@@ -30,10 +30,10 @@
             filePath = "Hunger/LocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
-            landmarkName = "keyEnteredProcessor(key:enteredUserLocation:)"
-            landmarkType = "7">
+            startingLineNumber = "225"
+            endingLineNumber = "225"
+            landmarkName = "LocationManager"
+            landmarkType = "3">
             <Locations>
                <Location
                   uuid = "1FBE8D81-DDD1-4DCB-8E36-C6041FF5BA6C - f05bce8ea6886147"
@@ -301,8 +301,8 @@
             filePath = "Hunger/LocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "locationManager(_:didUpdateLocations:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -317,8 +317,8 @@
             filePath = "Hunger/LocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "keyEnteredProcessor(key:enteredUserLocation:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -333,9 +333,9 @@
             filePath = "Hunger/LocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
-            landmarkName = "keyExitedProcessor(key:exitedUserLocation:)"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "keyMovedProcessor(key:movedUserLocation:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -349,8 +349,8 @@
             filePath = "Hunger/LocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "keyMovedProcessor(key:movedUserLocation:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-class User: Hashable {
+struct User: Hashable {
     static func == (lhs: User, rhs: User) -> Bool {
         
         return lhs.uid == rhs.uid
@@ -20,10 +20,6 @@ class User: Hashable {
     
     func hash(into hasher: inout Hasher){
         hasher.combine(self.uid)
-        hasher.combine(self.email)
-        hasher.combine(self.displayName)
-        hasher.combine(self.location)
-        hasher.combine(self.playsAs)
     }
     
     var uid: String

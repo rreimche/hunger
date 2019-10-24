@@ -144,7 +144,10 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
             lastKnownLocation = newLocation
             
             // Post location to firebase.
-            self.dbRef.child(databasePath).child(session.user!.uid).setValue(["playsAs": String(session.user!.playsAs!.rawValue)])
+            self.dbRef.child(databasePath).child(session.user!.uid).setValue([
+                "playsAs": String(session.user!.playsAs!.rawValue),
+                "lastTimeOnline": ServerValue.timestamp()
+            ])
             geoFire.setLocation(lastKnownLocation!, forKey: session.user!.uid){ (error) in
                 if (error != nil) {
                     print("An error occured: \(String(describing: error))")
@@ -172,28 +175,18 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     func keyEnteredProcessor(key enteredUid: String, enteredUserLocation: CLLocation) -> () {
         
-        switch enteredUid == session.user!.uid {
+        if enteredUid == session.user!.uid {
             
-        case true:
             print("The .keyEntered fired on the local user, nothing to do.")
             
-        case false:
+        } else {
             print("Player with uid (key) '\(String(describing: enteredUid))' entered the search area and is at location '\(String(describing: enteredUserLocation))'")
             
             dbRef.child(databasePath + "/" + enteredUid + "playsAs").observeSingleEvent(of: .value, with: { (snapshot) in
                 guard let stringUserPlaysAs = snapshot.value as? String else {
-                    print ("Warning: playAs of an online player stored in the realtime database seems to be absent. This .keyEnteredEvent will not be processed.")
+                    print ("Warning: playAs of a nearby online player stored in the realtime database seems to be absent. This .keyEnteredEvent will not be processed.")
                     return
                 }
-                
-//                do {
-//
-//                    let userPlaysAs: PlayAs = try PlayAs(playerType: stringUserPlaysAs)
-//
-//                } catch PlayAsError.invalidPlayerType(type: stringUserPlaysAs) {
-//                    print("Invalid player type when initializing a PlayAs instance:" + stringUserPlaysAs)
-//                    return
-//                }
                 
                 let userPlaysAs: PlayAs?
 
@@ -204,7 +197,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
                 }
 
                 guard userPlaysAs != nil else {
-                    print("Invalid player type when initializing a PlayAs instance:" + stringUserPlaysAs + ". Therefore no marker will be placed for this player." )
+                    print("Warning: Invalid player type when initializing a PlayAs instance:" + stringUserPlaysAs + ". Therefore no marker will be placed for this player." )
                     return
                 }
                 
@@ -217,7 +210,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
                 }
         
                 
-                self.nearbyPlayers.updateValue(distanceToUser, forKey: enteredUser)
+                //self.nearbyPlayers.updateValue(distanceToUser, forKey: enteredUser)
+                self.nearbyPlayers[enteredUser] = distanceToUser
                 
             }) { (error) in
                 print(error.localizedDescription)
@@ -237,25 +231,50 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         self.nearbyPlayers.removeValue(forKey: exitedUser)
     }
     
-    func keyMovedProcessor(key uid: String, movedUserLocation: CLLocation) -> () {
+    func keyMovedProcessor(key movedUid: String, movedUserLocation: CLLocation) -> () {
         
-        switch uid == session.user!.uid {
-        case true:
+        if movedUid == session.user!.uid {
+        
             print("The .keyMoved fired on the local user, nothing to do.")
             
-        case false:
-            print("Player with uid (key) '\(String(describing: uid))' moved in the search area and is at location '\(String(describing: movedUserLocation))'")
+        } else {
             
-            let movedUser = User(uid: uid, displayName: nil, email: nil, location: movedUserLocation)
-            let distanceToUser = lastKnownLocation!.distance(from: movedUserLocation)
+            print("Player with uid (key) '\(String(describing: movedUid))' moved in the search area and is at location '\(String(describing: movedUserLocation))'")
             
-            
-            if localUserCollidedWithAnotherPlayerType(anotherPlayer: movedUser) {
-                print("Collision of different types of players happened: Local user \(session.user!.uid) (\(session.user!.playsAs!)) and another user \(movedUser.uid) (\(movedUser.playsAs!)).")
-                self.zombieCollidedWithHuman = true
-            }
+            dbRef.child(databasePath + "/" + movedUid + "playsAs").observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let stringUserPlaysAs = snapshot.value as? String else {
+                    print ("Warning: playAs of a nearby online player stored in the realtime database seems to be absent. This .keyMovedEvent will not be processed.")
+                    return
+                }
+                
+                let userPlaysAs: PlayAs?
 
-            self.nearbyPlayers.updateValue(distanceToUser, forKey: movedUser)
+                switch stringUserPlaysAs {
+                case "human": userPlaysAs = .human
+                case "zombie": userPlaysAs = .zombie
+                default: userPlaysAs = nil
+                }
+
+                guard userPlaysAs != nil else {
+                    print("Warning: Invalid player type when initializing a PlayAs instance:" + stringUserPlaysAs + ". Therefore no marker will be placed for this player." )
+                    return
+                }
+                
+                let movedUser = User(uid: movedUid, displayName: nil, email: nil, location: movedUserLocation)
+                let distanceToUser = self.lastKnownLocation!.distance(from: movedUserLocation)
+                
+                
+                    if self.localUserCollidedWithAnotherPlayerType(anotherPlayer: movedUser) {
+                    print("Collision of different types of players happened: Local user \(self.session.user!.uid) (\(self.session.user!.playsAs!)) and another user \(movedUser.uid) (\(movedUser.playsAs!)).")
+                    self.zombieCollidedWithHuman = true
+                }
+
+                //self.nearbyPlayers.updateValue(distanceToUser, forKey: movedUser)
+                self.nearbyPlayers[movedUser] = distanceToUser
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+        
         }
 
         

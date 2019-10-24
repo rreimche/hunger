@@ -10,7 +10,10 @@ import SwiftUI
 
 struct GameOverView: View {
     var body: some View {
-        Text("Gave Over!")
+        VStack{
+            Text("Zombies ate your brains!")
+            Text("Gave Over.")
+        }
     }
 }
 

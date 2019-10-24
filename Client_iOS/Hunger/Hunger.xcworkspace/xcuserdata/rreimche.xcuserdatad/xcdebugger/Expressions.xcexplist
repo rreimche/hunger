@@ -3,43 +3,35 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "LocationManager.locationManager(_:didUpdateLocations:):LocationManager.swift">
+         contextName = "closure #1 in MainMenuView.body.getter:MainMenuView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.circleQuery!.center.coordinate.longitude">
-            </PersistentString>
-            <PersistentString
-               value = "self.circleQuery">
-            </PersistentString>
-            <PersistentString
-               value = "self.circleQuery!.center.coordinate.latitude">
-            </PersistentString>
-            <PersistentString
-               value = "self.nearbyPlayers">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "GameView.body.getter:GameView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "!locationManager.collisionHappened">
-            </PersistentString>
-            <PersistentString
-               value = "locationManager.collisionHappened">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "MapView.updateUIView(_:context:):MapView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.locationManager.lastKnownLocation.coordinate">
+               value = "session.user">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in SignInView.body.getter:SignInView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in LocationManager.keyMovedProcessor(key:movedUserLocation:):LocationManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "snapshot.value as? String">
+            </PersistentString>
+            <PersistentString
+               value = "movedUser.uid!">
+            </PersistentString>
+            <PersistentString
+               value = "session.user!.uid">
+            </PersistentString>
+            <PersistentString
+               value = "databasePath + &quot;/&quot; + movedUid + &quot;playsAs&quot;">
+            </PersistentString>
+            <PersistentString
+               value = "snapshot.value">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #1 in SignInView.signIn():SignInView.swift">
@@ -58,10 +50,27 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in MainMenuView.body.getter:MainMenuView.swift">
+         contextName = "LocationManager.locationManager(_:didUpdateLocations:):LocationManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "session.user">
+               value = "self.circleQuery!.center.coordinate.longitude">
+            </PersistentString>
+            <PersistentString
+               value = "self.circleQuery!.center.coordinate.latitude">
+            </PersistentString>
+            <PersistentString
+               value = "self.circleQuery">
+            </PersistentString>
+            <PersistentString
+               value = "self.nearbyPlayers">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MapView.updateUIView(_:context:):MapView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.locationManager.lastKnownLocation.coordinate">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -81,6 +90,17 @@
             </PersistentString>
             <PersistentString
                value = "uid == session.user!.uid">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameView.body.getter:GameView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "!locationManager.collisionHappened">
+            </PersistentString>
+            <PersistentString
+               value = "locationManager.collisionHappened">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

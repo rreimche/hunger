@@ -28,7 +28,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     private let circleQueryRadius = 10 // in kilometers
     
     // Distance at which two users are though to collide
-    let collisionDistance: Double = 3
+    let collisionDistance: Double = 5
     var zombieCollidedWithHuman = false
     
     // MARK: ObservableObject
@@ -182,7 +182,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         } else {
             print("Player with uid (key) '\(String(describing: enteredUid))' entered the search area and is at location '\(String(describing: enteredUserLocation))'")
             
-            dbRef.child(databasePath + "/" + enteredUid + "playsAs").observeSingleEvent(of: .value, with: { (snapshot) in
+            dbRef.child(databasePath + "/" + enteredUid + "/playsAs").observeSingleEvent(of: .value, with: { (snapshot) in
                 guard let stringUserPlaysAs = snapshot.value as? String else {
                     print ("Warning: playAs of a nearby online player stored in the realtime database seems to be absent. This .keyEnteredEvent will not be processed.")
                     return
@@ -241,7 +241,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
             
             print("Player with uid (key) '\(String(describing: movedUid))' moved in the search area and is at location '\(String(describing: movedUserLocation))'")
             
-            dbRef.child(databasePath + "/" + movedUid + "playsAs").observeSingleEvent(of: .value, with: { (snapshot) in
+            dbRef.child(databasePath + "/" + movedUid + "/playsAs").observeSingleEvent(of: .value, with: { (snapshot) in
                 guard let stringUserPlaysAs = snapshot.value as? String else {
                     print ("Warning: playAs of a nearby online player stored in the realtime database seems to be absent. This .keyMovedEvent will not be processed.")
                     return
@@ -260,11 +260,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
                     return
                 }
                 
-                let movedUser = User(uid: movedUid, displayName: nil, email: nil, location: movedUserLocation)
+                let movedUser = User(uid: movedUid, displayName: nil, email: nil, location: movedUserLocation, playsAs: userPlaysAs)
                 let distanceToUser = self.lastKnownLocation!.distance(from: movedUserLocation)
                 
                 
-                    if self.localUserCollidedWithAnotherPlayerType(anotherPlayer: movedUser) {
+                if self.localUserCollidedWithAnotherPlayerType(anotherPlayer: movedUser) {
                     print("Collision of different types of players happened: Local user \(self.session.user!.uid) (\(self.session.user!.playsAs!)) and another user \(movedUser.uid) (\(movedUser.playsAs!)).")
                     self.zombieCollidedWithHuman = true
                 }

@@ -50,7 +50,7 @@ struct MapView: UIViewRepresentable {
     
     // TODO: differentiate between other zombies and other humans
     func placeNearbyPlayersMarkers(on mapView: GMSMapView){
-        for (user, _) in locationManager.nearbyPlayers {
+        for (_, (user, _)) in locationManager.nearbyPlayers {
             guard user.location != nil else {
                 print("Warning: the user \(user.uid) has either no location for marker placement, therefore no marker is placed for him.")
                 continue

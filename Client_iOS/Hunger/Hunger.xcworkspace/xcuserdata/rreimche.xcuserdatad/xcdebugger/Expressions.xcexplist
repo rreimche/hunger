@@ -20,19 +20,10 @@
          contextName = "closure #1 in LocationManager.keyMovedProcessor(key:movedUserLocation:):LocationManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "snapshot.value as? String">
+               value = "movedUserLocation.coordinate">
             </PersistentString>
             <PersistentString
-               value = "movedUser.uid!">
-            </PersistentString>
-            <PersistentString
-               value = "session.user!.uid">
-            </PersistentString>
-            <PersistentString
-               value = "databasePath + &quot;/&quot; + movedUid + &quot;playsAs&quot;">
-            </PersistentString>
-            <PersistentString
-               value = "snapshot.value">
+               value = "self.nearbyPlayers[movedUser]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -111,7 +102,19 @@
          contextName = "MapViewMK.updateUIView(_:context:):MapViewMK.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.locationManager.store.circleQuery.centerLocation">
+               value = "locationManager">
+            </PersistentString>
+            <PersistentString
+               value = "mapView.annotations">
+            </PersistentString>
+            <PersistentString
+               value = "annotation is MKUserLocation">
+            </PersistentString>
+            <PersistentString
+               value = "otherPlayersMarkers">
+            </PersistentString>
+            <PersistentString
+               value = "locationManager.nearbyPlayers">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

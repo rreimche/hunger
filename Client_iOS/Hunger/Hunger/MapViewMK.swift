@@ -89,10 +89,16 @@ struct MapViewMK: UIViewRepresentable {
         print("Updating MapViewMK")
         
         // TODO add smarter updating of the markers – change positions instead of replacing
-        mapView.removeAnnotations(otherPlayersMarkers)
-        for (user, _) in locationManager.nearbyPlayers {
+        for annotation in mapView.annotations {
+            if !(annotation is MKUserLocation) {
+                mapView.removeAnnotation(annotation)
+            }
+        }
+        
+        for (_, (user, _)) in locationManager.nearbyPlayers {
            //TODO take playAs from user
-            mapView.addAnnotation(MKAnnotationForPlayers(playsAs: .zombie, coordinate: user.location!.coordinate ))
+            let newMarker = MKAnnotationForPlayers(playsAs: user.playsAs!, coordinate: user.location!.coordinate )
+            mapView.addAnnotation(newMarker)
         }
     }
      

@@ -35,9 +35,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     // MARK: ObservableObject
     
-    @Published var lastKnownLocation: CLLocation?
+    
+    //@Published var lastKnownLocation: CLLocation? don't need to update map view on this, because it is update by user tracking
+    var lastKnownLocation: CLLocation?
     typealias DistanceToUser = CLLocationDistance
-    @Published var nearbyPlayers : Dictionary<User, DistanceToUser> = [:]
+    @Published var nearbyPlayers : Dictionary<FbUid, (User, DistanceToUser)> = [:]
 
     // MARK: INIT
     
@@ -188,7 +190,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         
                 
                 //self.nearbyPlayers.updateValue(distanceToUser, forKey: enteredUser)
-                self.nearbyPlayers[enteredUser] = distanceToUser
+                self.nearbyPlayers[enteredUser.uid] = (enteredUser, distanceToUser)
                 
             }) { (error) in
                 print(error.localizedDescription)
@@ -239,7 +241,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
                 }
 
                 //self.nearbyPlayers.updateValue(distanceToUser, forKey: movedUser)
-                self.nearbyPlayers[movedUser] = distanceToUser
+                self.nearbyPlayers[movedUser.uid] = (movedUser, distanceToUser)
+                
+                print("Updated location of the moving nearby user \(movedUser.uid).")
             }) { (error) in
                 print(error.localizedDescription)
             }
@@ -254,7 +258,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
 
         let exitedUser = User(uid: uid, displayName: nil, email: nil, location: exitedUserLocation)
 
-        self.nearbyPlayers.removeValue(forKey: exitedUser)
+        self.nearbyPlayers.removeValue(forKey: exitedUser.uid)
     }
     
     // MARK: Collision detection

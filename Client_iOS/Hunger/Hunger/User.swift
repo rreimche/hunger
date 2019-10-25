@@ -9,6 +9,9 @@
 import Foundation
 import CoreLocation
 
+// fbUID = FirebaseUid
+typealias FbUid = String
+
 // TODO Differentiate between score as a zombie and as a human
 struct User: Hashable {
     static func == (lhs: User, rhs: User) -> Bool {
@@ -23,7 +26,7 @@ struct User: Hashable {
         hasher.combine(self.uid)
     }
     
-    var uid: String
+    var uid: FbUid
     var email: String?
     var displayName: String?
     var location: CLLocation?

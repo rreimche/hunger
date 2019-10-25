@@ -10,10 +10,12 @@ import SwiftUI
 
 struct GameOverView: View {
     var body: some View {
-        VStack{
-            Text("Zombies ate your brains!")
-            Text("Gave Over.")
-        }
+            VStack{
+                Text("🧟‍♂️🧟‍♂️🧟‍♂️").font(.largeTitle) 
+                Text("Zombies ate your brains!")
+                Text("Gave Over.")
+            }
+        
     }
 }
 

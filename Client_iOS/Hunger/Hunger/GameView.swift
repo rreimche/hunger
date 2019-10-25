@@ -44,8 +44,32 @@ struct GameView: View {
 //        }
 //    }
     
-    
-    // TODO abstract to a cloud function for better control
+    // TODO maybe abstract saving to database to a cloud function for better control for additional costs of cloud function?
+    func startScoreTimer(){
+        if self.session.user!.playsAs == .human {
+            self.timer.startTimer(timeInterval: TimeInterval(self.secondsToScore), withBlock: { timer in
+                // Make sure we have current score
+                if self.session.user!.score == nil {
+                    
+                    let snapshot: Dictionary<String, Any> = self.fsdb.readDocument(withDocumentPath: self.session.user!.uid, atCollectionPath: self.scoreCollectionPath)
+                    
+                    
+                    // If we already have a score, use it, otherwise set to 0
+                    if !snapshot.isEmpty && type(of: snapshot["value"]) == Int.self  {
+                        self.session.user!.score = (snapshot["value"] as! Int)
+                    } else {
+                        self.session.user!.score = 0
+                    }
+                }
+                
+                self.session.user!.score! += 1
+                
+                self.fsdb.updateDocument(
+                    ["value" : self.session.user!.score!], withDocumentPath: self.session.user!.uid, atCollectionPath: self.scoreCollectionPath)
+                print("Updated score for user \(self.session.user!.uid)")
+            })
+        }
+    }
     
     
     
@@ -68,31 +92,7 @@ struct GameView: View {
                     self.locationManager.goOnline()
                     
                     // Start a timer that updates score for a human player in dependency of time the user has spent online
-                    // TODO maybe abstract saving to database to a cloud function for better control for additional costs of cloud function?
-                    if self.session.user!.playsAs == .human {
-                        self.timer.startTimer(timeInterval: TimeInterval(self.secondsToScore), withBlock: { timer in
-                            // Make sure we have current score
-                            if self.session.user!.score == nil {
-                                
-                                let snapshot: Dictionary<String, Any> = self.fsdb.readDocument(withDocumentPath: self.session.user!.uid, atCollectionPath: self.scoreCollectionPath)
-                                
-                                
-                                // If we already have a score, use it, otherwise set to 0
-                                if !snapshot.isEmpty && type(of: snapshot["value"]) == Int.self  {
-                                    self.session.user!.score = (snapshot["value"] as! Int)
-                                } else {
-                                    self.session.user!.score = 0
-                                }
-                            }
-                            
-                            self.session.user!.score! += 1
-                            
-                            self.fsdb.updateDocument(
-                                ["value" : self.session.user!.score!], withDocumentPath: self.session.user!.uid, atCollectionPath: self.scoreCollectionPath)
-                            print("Updated score for user \(self.session.user!.uid)")
-                        })
-                    }
-                    
+                    self.startScoreTimer()
                     
                     print("Came online.")
                 }.onDisappear{
@@ -109,7 +109,9 @@ struct GameView: View {
             }
             
         } else {
-            GameOverView()
+            GameOverView().onAppear{
+                print("Zombies ate your brains! Game over")
+            }
         }
     }
 }

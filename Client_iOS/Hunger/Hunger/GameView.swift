@@ -74,16 +74,12 @@ struct GameView: View {
                             // Make sure we have current score
                             if self.session.user!.score == nil {
                                 
-                                var snapshot: Dictionary<String, Any>?
-                                if let result = self.fsdb.readDocument(withDocumentPath: self.session.user!.uid, atCollectionPath: self.scoreCollectionPath){
-                                    snapshot = result
-                                } else {
-                                    snapshot = [:]
-                                }
+                                let snapshot: Dictionary<String, Any> = self.fsdb.readDocument(withDocumentPath: self.session.user!.uid, atCollectionPath: self.scoreCollectionPath)
                                 
-                                let scoreEntry: (String, Any)? = snapshot?.first
-                                if let score = scoreEntry?.1 as? Int{
-                                    self.session.user!.score = score
+                                
+                                // If we already have a score, use it, otherwise set to 0
+                                if !snapshot.isEmpty && type(of: snapshot["value"]) == Int.self  {
+                                    self.session.user!.score = (snapshot["value"] as! Int)
                                 } else {
                                     self.session.user!.score = 0
                                 }

@@ -25,11 +25,18 @@
 
 - (void)updateDocument:(NSDictionary<NSString *, id> *)document withDocumentPath:(NSString *)docPath atCollectionPath:(NSString *)colPath;
 
+// Every document in Firestore is a dictionary String to something else
+// These dictionaries are saved at document path. So we have the following structure:
+// collection > document > data dictionary
+// This method returns the data dictionary
+// Returns an empty dictionary in case of error.
 - (NSDictionary<NSString *, id> *)readDocumentWithDocumentPath:(NSString *)docPath atCollectionPath:(NSString *)colPath;
 
+// This method returns a dictionary of [document path : data dictionary]
 // Returns an empty dictionary in case of error.
 - (NSDictionary<NSString *, id> *)readDocumentsAtCollectionPath:(NSString *)path;
 
+// This method returns a dictionary of [document path : data dictionary]
 // Returns an empty dictionary in case of error.
 - (NSDictionary<NSString *, id> *)readDocumentsAtCollectionPath:(NSString *)path onlyFirst:(int)limit orderedBy:(NSString *)orderBy;
 

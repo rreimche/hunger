@@ -49,6 +49,8 @@ FIRFirestore *db;
     
     FIRDocumentReference *docRef =
         [[db collectionWithPath:colPath] documentWithPath:docPath];
+    
+    // TODO somehow get data out of result, because it seems that the method returns before the block starts.
     [docRef getDocumentWithCompletion:^(FIRDocumentSnapshot *snapshot, NSError *error) {
       if (snapshot.exists) {
         // Document data may be nil if the document exists but has no keys or values.

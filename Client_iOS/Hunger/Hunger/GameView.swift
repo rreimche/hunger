@@ -40,11 +40,11 @@ struct GameView: View {
                 mapViewMK
                     .onAppear{
                     self.session.user!.playsAs = self.playsAs
-                    self.locationManager.startUpdatingLocations()
+                    self.locationManager.goOnline()
                     print("Started updating locations.")
                     //self.mapViewMK.startTrackingUser()
                 }.onDisappear {
-                    self.locationManager.stopUpdatingLocations()
+                    self.locationManager.goOffline()
                     self.session.user!.playsAs = nil
                     print("Stopped updating locations.")
                 }

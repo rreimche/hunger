@@ -10,11 +10,13 @@ import Foundation
 import MapKit
 
 class MKAnnotationForPlayers: NSObject, MKAnnotation {
-    var coordinate: CLLocationCoordinate2D
+    dynamic var coordinate: CLLocationCoordinate2D
+    var playerUid: FbUid
     
     var playsAs: PlayAs
     
-    init(playsAs: PlayAs, coordinate: CLLocationCoordinate2D){
+    init(playerUid: FbUid, playsAs: PlayAs, coordinate: CLLocationCoordinate2D){
+        self.playerUid = playerUid
         self.playsAs = playsAs
         self.coordinate = coordinate
     }

@@ -66,9 +66,30 @@ struct GameView: View {
                 
                 self.fsdb.updateDocument(
                     ["value" : self.session.user!.score!], withDocumentPath: self.session.user!.uid, atCollectionPath: self.scoreCollectionPath)
-                print("Updated score for user \(self.session.user!.uid)")
+                print("Updated score for human user \(self.session.user!.uid)")
             })
         }
+    }
+    
+    func addZombieScore(){
+        if self.session.user!.score == nil {
+            
+            let snapshot: Dictionary<String, Any> = self.fsdb.readDocument(withDocumentPath: self.session.user!.uid, atCollectionPath: self.scoreCollectionPath)
+            
+            
+            // If we already have a score, use it, otherwise set to 0
+            if !snapshot.isEmpty && type(of: snapshot["value"]) == Int.self  {
+                self.session.user!.score = (snapshot["value"] as! Int)
+            } else {
+                self.session.user!.score = 0
+            }
+        }
+        
+        self.session.user!.score! += 100
+        
+        self.fsdb.updateDocument(
+            ["value" : self.session.user!.score!], withDocumentPath: self.session.user!.uid, atCollectionPath: self.scoreCollectionPath)
+        print("Updated score for zombie user \(self.session.user!.uid)")
     }
     
     
@@ -87,6 +108,10 @@ struct GameView: View {
         if( !(locationManager.zombieCollidedWithHuman && self.playsAs == .human) ){
             ZStack(alignment: Alignment.bottomTrailing){
                 
+                
+                
+                
+                
                 mapViewMK.onAppear{
                     self.session.user!.playsAs = self.playsAs
                     self.locationManager.goOnline()
@@ -101,10 +126,26 @@ struct GameView: View {
                     print("Went offline.")
                 }
                 
+                
+                if locationManager.zombieCollidedWithHuman && self.playsAs == .zombie {
+                    Text("Mmmm... yummy brains!")
+                        .font(.largeTitle)
+                    //.animation(.easeOut)
+                        .onAppear{
+                            self.addZombieScore()
+                            
+                        }
+                }
+                
+                
                 UserTrackingButtonView(mapView: mapViewMK.mapView)
                     .frame(width: 40, height: 40)
                     .cornerRadius(20)
                     .offset(x: -20, y: -20)
+                
+                
+                
+                
             
             }
             

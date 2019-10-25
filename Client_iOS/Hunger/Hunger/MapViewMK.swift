@@ -58,8 +58,8 @@ struct MapViewMK: UIViewRepresentable {
     
     func makeUIView(context: Context) -> MKMapView {
         
-        let startingLocation = locationManager.lastKnownLocation ?? locationManager.defaultStartingLocation
-        let startingRegion = MKCoordinateRegion(center: startingLocation.coordinate, latitudinalMeters: 200, longitudinalMeters: 200)
+        //let startingLocation = locationManager.lastKnownLocation ?? locationManager.defaultStartingLocation
+        //let startingRegion = MKCoordinateRegion(center: startingLocation.coordinate, latitudinalMeters: 200, longitudinalMeters: 200)
         
         /*let leftMargin:CGFloat = 10
         let topMargin:CGFloat = 60
@@ -89,16 +89,62 @@ struct MapViewMK: UIViewRepresentable {
         print("Updating MapViewMK")
         
         // TODO add smarter updating of the markers – change positions instead of replacing
-        for annotation in mapView.annotations {
-            if !(annotation is MKUserLocation) {
-                mapView.removeAnnotation(annotation)
+//        for annotation in mapView.annotations {
+//            if !(annotation is MKUserLocation) {
+//                mapView.removeAnnotation(annotation)
+//            }
+//        }
+        
+        // Remove annotations for players that are no more nearby.
+        var toRemove: [MKAnnotationForPlayers] = []
+        for a in mapView.annotations {
+            if a is MKUserLocation { continue }
+            
+            let annotation = a as! MKAnnotationForPlayers
+            if !self.locationManager.nearbyPlayers.contains(where: { (key, _) -> Bool in
+                
+                key == annotation.playerUid
+                
+            }) {
+                toRemove.append(annotation)
             }
         }
         
-        for (_, (user, _)) in locationManager.nearbyPlayers {
-           //TODO take playAs from user
-            let newMarker = MKAnnotationForPlayers(playsAs: user.playsAs!, coordinate: user.location!.coordinate )
-            mapView.addAnnotation(newMarker)
+        mapView.removeAnnotations(toRemove)
+        
+        // Add annotations for players that have entered the nearby region.
+        for (_, (user, _)) in self.locationManager.nearbyPlayers {
+            if !mapView.annotations.contains(where: { (a) -> Bool in
+                if a is MKUserLocation {
+                    return false
+                }
+                
+                let annotation = a as! MKAnnotationForPlayers
+                
+                return user.uid == annotation.playerUid
+                
+            }) {
+                let newMarker = MKAnnotationForPlayers(playerUid: user.uid, playsAs: user.playsAs!, coordinate: user.location!.coordinate )
+                mapView.addAnnotation(newMarker)
+            }
+        }
+        
+        
+        // Animate location changes for players who moved inside the nearby region.
+        UIView.animate(withDuration: 0.50){
+            
+            for a  in mapView.annotations {
+                if a is MKUserLocation { continue }
+                
+                let annotation = a as! MKAnnotationForPlayers
+                let (user, _) = self.locationManager.nearbyPlayers[annotation.playerUid]!
+                annotation.coordinate = user.location!.coordinate
+            }
+            
+//            for (_, (user, _)) in self.locationManager.nearbyPlayers {
+    //            let newMarker = MKAnnotationForPlayers(playsAs: user.playsAs!, coordinate: user.location!.coordinate )
+    //            mapView.addAnnotation(newMarker)
+//            }
         }
     }
      

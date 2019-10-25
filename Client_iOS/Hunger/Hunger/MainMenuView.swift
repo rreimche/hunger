@@ -11,6 +11,7 @@ import Firebase
 
 struct MainMenuView: View {
    @EnvironmentObject var session: SessionStore
+   @EnvironmentObject var locationManager: LocationManager
     
     func displayName() -> String {
         
@@ -31,18 +32,25 @@ struct MainMenuView: View {
         } catch let signOutError as NSError {
           print ("Error signing out: %@", signOutError)
         }
-    }
+    } 
     
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Play as")) {
-                    NavigationLink(destination: GameView(playAs: .human)){ Text("👩🏻‍💼").font(.largeTitle).multilineTextAlignment(.center) }
-                    NavigationLink(destination: GameView(playAs: .zombie)){ Text("🧟‍♀️").font(.largeTitle).multilineTextAlignment(.center) }
+                Section() {
+                    NavigationLink(destination: GameView(playAs: .human)){ Text("Play as 👩🏻‍💼").font(.title)
+                    }
+                    
+                    NavigationLink(destination: GameView(playAs: .zombie)){ Text("Play as 🧟‍♀️").font(.title)
+                    }
+                    
+                    
                 }
                 
                 Section{
-                    NavigationLink(destination: HallOfFameView()){ Text("Hall of the Toughest 👍") }
+                    NavigationLink(destination: HallOfFameView()){ Text("The fittest 🤩")
+                        
+                    }
                 }
                 
                 Section {

@@ -37,7 +37,8 @@ struct GameView: View {
         if( !(locationManager.zombieCollidedWithHuman && self.playsAs == .human) ){
             ZStack(alignment: Alignment.bottomTrailing){
                 // TODO find a way for LocationManager to start providing locations only when .startUpdatingLocations() is called.
-                mapViewMK.onAppear{
+                mapViewMK
+                    .onAppear{
                     self.session.user!.playsAs = self.playsAs
                     self.locationManager.startUpdatingLocations()
                     print("Started updating locations.")
@@ -47,6 +48,7 @@ struct GameView: View {
                     self.session.user!.playsAs = nil
                     print("Stopped updating locations.")
                 }
+                
                 UserTrackingButtonView(mapView: mapViewMK.mapView)
                     .frame(width: 40, height: 40)
                     .cornerRadius(20)

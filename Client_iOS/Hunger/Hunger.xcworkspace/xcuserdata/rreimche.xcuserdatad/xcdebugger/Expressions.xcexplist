@@ -11,6 +11,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "LocationManager.localUserCollidedWithAnotherPlayerType(anotherPlayer:):LocationManager.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in SignInView.body.getter:SignInView.swift">
       </ContextState>
       <ContextState
@@ -120,6 +123,14 @@
             </PersistentString>
             <PersistentString
                value = "session.user!.uid">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in GameView.body.getter:GameView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.session.user!.playsAs">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -33,6 +33,8 @@
 		02CBED5C23391D8C00EF7F7F /* HungerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CBED5B23391D8C00EF7F7F /* HungerUITests.swift */; };
 		02CBED6A233A007F00EF7F7F /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CBED69233A007F00EF7F7F /* SignInView.swift */; };
 		02CBED6C233A19B600EF7F7F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02CBED6B233A19B600EF7F7F /* GoogleService-Info.plist */; };
+		02D1433323631AFD009CF5AE /* FirestoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D1433223631AFD009CF5AE /* FirestoreManager.m */; };
+		02D14338236365B4009CF5AE /* GameViewTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D14337236365B4009CF5AE /* GameViewTimer.swift */; };
 		6E459AF7DD440E1E60C24D48 /* Pods_HungerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88523CC0F8BF10FC6A9C4A37 /* Pods_HungerTests.framework */; };
 		8D405E2E4085574ABEA95A6C /* Pods_HungerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6BAA2CC9329AC98FABD2BB /* Pods_HungerUITests.framework */; };
 		F9DC758762CCF1FE6F798EF4 /* Pods_Hunger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9100700568CF620886DE4880 /* Pods_Hunger.framework */; };
@@ -88,6 +90,10 @@
 		02CBED5D23391D8C00EF7F7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02CBED69233A007F00EF7F7F /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		02CBED6B233A19B600EF7F7F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		02D1433123631AFD009CF5AE /* Hunger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hunger-Bridging-Header.h"; sourceTree = "<group>"; };
+		02D1433223631AFD009CF5AE /* FirestoreManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirestoreManager.m; sourceTree = "<group>"; };
+		02D1433423631B30009CF5AE /* FirestoreManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirestoreManager.h; sourceTree = "<group>"; };
+		02D14337236365B4009CF5AE /* GameViewTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewTimer.swift; sourceTree = "<group>"; };
 		1373E662A0809F811BF5FADF /* Pods-HungerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungerUITests.debug.xcconfig"; path = "Target Support Files/Pods-HungerUITests/Pods-HungerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A6BAA2CC9329AC98FABD2BB /* Pods_HungerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HungerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		582CDF5FD870A2C28A4E69B7 /* Pods-Hunger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hunger.release.xcconfig"; path = "Target Support Files/Pods-Hunger/Pods-Hunger.release.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +166,7 @@
 				02AC0CCB233A5A8500521422 /* User.swift */,
 				02AC0CD1233A66AF00521422 /* MainMenuView.swift */,
 				02A3A947234E048F000827AB /* GameView.swift */,
+				02D14337236365B4009CF5AE /* GameViewTimer.swift */,
 				02A3A949234E09D6000827AB /* MapView.swift */,
 				0214E189235F7762000F92D4 /* MapViewMK.swift */,
 				02597D4D2360B274005F6D74 /* UserTrackingButtonView.swift */,
@@ -177,6 +184,9 @@
 				02CBED6B233A19B600EF7F7F /* GoogleService-Info.plist */,
 				02CBED3A23391D8800EF7F7F /* Hunger.xcdatamodeld */,
 				02CBED4123391D8B00EF7F7F /* Preview Content */,
+				02D1433423631B30009CF5AE /* FirestoreManager.h */,
+				02D1433223631AFD009CF5AE /* FirestoreManager.m */,
+				02D1433123631AFD009CF5AE /* Hunger-Bridging-Header.h */,
 			);
 			path = Hunger;
 			sourceTree = "<group>";
@@ -304,6 +314,7 @@
 				TargetAttributes = {
 					02CBED3223391D8800EF7F7F = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1110;
 					};
 					02CBED4B23391D8C00EF7F7F = {
 						CreatedOnToolsVersion = 11.0;
@@ -492,9 +503,11 @@
 				0214E18A235F7762000F92D4 /* MapViewMK.swift in Sources */,
 				02CBED3C23391D8800EF7F7F /* Hunger.xcdatamodeld in Sources */,
 				02CBED3723391D8800EF7F7F /* AppDelegate.swift in Sources */,
+				02D1433323631AFD009CF5AE /* FirestoreManager.m in Sources */,
 				0214E146235F517E000F92D4 /* MarkerIconView.swift in Sources */,
 				0274685C235382E6002C09F4 /* LocationManager.swift in Sources */,
 				02CBED3E23391D8800EF7F7F /* ContentView.swift in Sources */,
+				02D14338236365B4009CF5AE /* GameViewTimer.swift in Sources */,
 				02AC0CD2233A66AF00521422 /* MainMenuView.swift in Sources */,
 				0214E148235F5288000F92D4 /* PlayAs.swift in Sources */,
 				02CBED6A233A007F00EF7F7F /* SignInView.swift in Sources */,
@@ -673,6 +686,7 @@
 			baseConfigurationReference = B4631A32FD053313F44C8D80 /* Pods-Hunger.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Hunger/Preview Content\"";
 				DEVELOPMENT_TEAM = WW8QYYSA6J;
@@ -684,6 +698,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = RR.Hunger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hunger/Hunger-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -694,6 +710,7 @@
 			baseConfigurationReference = 582CDF5FD870A2C28A4E69B7 /* Pods-Hunger.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Hunger/Preview Content\"";
 				DEVELOPMENT_TEAM = WW8QYYSA6J;
@@ -705,6 +722,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = RR.Hunger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hunger/Hunger-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -16,12 +16,12 @@ import GeoFire
 
 
 // TODO find a way for LocationManager to start providing locations only when asked to.
-// TODO add removeAllObservers for the GeoFire somewhere?
 class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     let defaultStartingLocation = CLLocation(latitude: 0, longitude: 0)
-    private let manager: CLLocationManager
-    private var dbRef: DatabaseReference!
+    private let manager: CLLocationManager 
+    private var rdbRef: DatabaseReference!
+    private let fdbManager = FirestoreManager()
     private var geoFire: GeoFire!
     private var session: SessionStore!
     private var circleQuery: GFCircleQuery?
@@ -44,8 +44,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     init(manager: CLLocationManager = CLLocationManager(), session: SessionStore) {
         
         self.manager = manager
-        self.dbRef = Database.database().reference()
-        self.geoFire = GeoFire(firebaseRef: dbRef)
+        self.rdbRef = Database.database().reference()
+        self.geoFire = GeoFire(firebaseRef: rdbRef)
         self.session = session
         //self.lastKnownLocation = CLLocation(latitude: 0, longitude: 0)
         
@@ -76,6 +76,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
             self.circleQueryHandles.append(circleQuery!.observe(eventType, with: processor))
         }
     }
+    
     private func stopUpdatingLocations(){
         // TODO stop updating location service and geofire
         self.circleQuery!.removeAllObservers()
@@ -89,7 +90,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     func goOffline(){
         stopUpdatingLocations()
-        dbRef.child(databasePath + "/" + session.user!.uid).removeValue()
+        rdbRef.child(databasePath + "/" + session.user!.uid).removeValue()
         geoFire.removeKey(session.user!.uid)
     }
     
@@ -120,7 +121,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
             lastKnownLocation = newLocation
             
             // Post location to firebase.
-            self.dbRef.child(databasePath).child(session.user!.uid).setValue([
+            self.rdbRef.child(databasePath).child(session.user!.uid).setValue([
                 "playsAs": String(session.user!.playsAs!.rawValue),
                 "lastTimeOnline": ServerValue.timestamp()
             ])
@@ -158,7 +159,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         } else {
             print("Player with uid (key) '\(String(describing: enteredUid))' entered the search area and is at location '\(String(describing: enteredUserLocation))'")
             
-            dbRef.child(databasePath + "/" + enteredUid + "/playsAs").observeSingleEvent(of: .value, with: { (snapshot) in
+            rdbRef.child(databasePath + "/" + enteredUid + "/playsAs").observeSingleEvent(of: .value, with: { (snapshot) in
                 guard let stringUserPlaysAs = snapshot.value as? String else {
                     print ("Warning: playAs of a nearby online player stored in the realtime database seems to be absent. This .keyEnteredEvent will not be processed.")
                     return
@@ -209,7 +210,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
             
             print("Player with uid (key) '\(String(describing: movedUid))' moved in the search area and is at location '\(String(describing: movedUserLocation))'")
             
-            dbRef.child(databasePath + "/" + movedUid + "/playsAs").observeSingleEvent(of: .value, with: { (snapshot) in
+            rdbRef.child(databasePath + "/" + movedUid + "/playsAs").observeSingleEvent(of: .value, with: { (snapshot) in
                 guard let stringUserPlaysAs = snapshot.value as? String else {
                     print ("Warning: playAs of a nearby online player stored in the realtime database seems to be absent. This .keyMovedEvent will not be processed.")
                     return

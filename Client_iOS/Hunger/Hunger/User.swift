@@ -9,6 +9,7 @@
 import Foundation
 import CoreLocation
 
+// TODO Differentiate between score as a zombie and as a human
 struct User: Hashable {
     static func == (lhs: User, rhs: User) -> Bool {
         
@@ -27,13 +28,15 @@ struct User: Hashable {
     var displayName: String?
     var location: CLLocation?
     var playsAs : PlayAs?
+    var score: Int?
 
-    init(uid: String, displayName: String?, email: String?, location: CLLocation? = nil, playsAs: PlayAs? = nil) {
+    init(uid: String, displayName: String?, email: String?, location: CLLocation? = nil, playsAs: PlayAs? = nil, score: Int? = nil) {
         self.uid = uid
         self.email = email
         self.displayName = displayName
         self.location = location
         self.playsAs = playsAs
+        self.score = score
     }
 
 }

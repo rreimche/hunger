@@ -2,6 +2,10 @@
 //  MapView.swift
 //  Hunger
 //
+//  DEPRECATED IN FAVOR OF MapViewMK
+//
+//  Represents a map view provided by Google Maps SDK.
+//
 //  Created by Roman Reimche on 09.10.19.
 //  Copyright © 2019 Roman Reimche. All rights reserved.
 //

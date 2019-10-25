@@ -17,9 +17,11 @@ struct GameView: View {
     let playsAs: PlayAs
     let mapViewMK: MapViewMK
     
+    
+    
+    
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var locationManager: LocationManager
-    // TODO should I call MapView.updateView from a Coordinator?
     
     
     // Distance upon reaching (<=) which two users are thought to collide
@@ -27,22 +29,77 @@ struct GameView: View {
     
     var collisionHappened = false
     
-    init(playAs: PlayAs){
-        self.playsAs = playAs
-        self.mapViewMK = MapViewMK(playAs: playAs)
+    // MARK: Saving score
+    
+    
+    // Every 30 minutes seconds of playing a human player receices a score.
+    // This timer fires every 30 minutes (1800 seconds) calling addScore(Timer).
+    let secondsToScore = 3 //1800
+    let timer = GameViewTimer()
+    let fsdb: FirestoreManager! = FirestoreManager()
+    let scoreCollectionPath = "score"
+//    var pathToUid: String {
+//        get {
+//            scoreCollectionPath + "/" + session.user!.uid
+//        }
+//    }
+    
+    
+    // TODO abstract to a cloud function for better control
+    
+    
+    
+    // MARK: Init
+    
+    init(playsAs: PlayAs){
+        self.playsAs = playsAs
+        self.mapViewMK = MapViewMK(playAs: playsAs)
     }
+    
+    // MARK: Body
     
     @ViewBuilder
     var body: some View { 
         if( !(locationManager.zombieCollidedWithHuman && self.playsAs == .human) ){
             ZStack(alignment: Alignment.bottomTrailing){
                 
-                mapViewMK
-                    .onAppear{
+                mapViewMK.onAppear{
                     self.session.user!.playsAs = self.playsAs
                     self.locationManager.goOnline()
+                    
+                    // Start a timer that updates score for a human player in dependency of time the user has spent online
+                    // TODO maybe abstract saving to database to a cloud function for better control for additional costs of cloud function?
+                    if self.session.user!.playsAs == .human {
+                        self.timer.startTimer(timeInterval: TimeInterval(self.secondsToScore), withBlock: { timer in
+                            // Make sure we have current score
+                            if self.session.user!.score == nil {
+                                
+                                var snapshot: Dictionary<String, Any>?
+                                if let result = self.fsdb.readDocument(withDocumentPath: self.session.user!.uid, atCollectionPath: self.scoreCollectionPath){
+                                    snapshot = result
+                                } else {
+                                    snapshot = [:]
+                                }
+                                
+                                let scoreEntry: (String, Any)? = snapshot?.first
+                                if let score = scoreEntry?.1 as? Int{
+                                    self.session.user!.score = score
+                                } else {
+                                    self.session.user!.score = 0
+                                }
+                            }
+                            
+                            self.session.user!.score! += 1
+                            
+                            self.fsdb.updateDocument(
+                                ["value" : self.session.user!.score!], withDocumentPath: self.session.user!.uid, atCollectionPath: self.scoreCollectionPath)
+                            print("Updated score for user \(self.session.user!.uid)")
+                        })
+                    }
+                    
+                    
                     print("Came online.")
-                }.onDisappear {
+                }.onDisappear{
                     self.locationManager.goOffline()
                     self.session.user!.playsAs = nil
                     print("Went offline.")
@@ -62,7 +119,10 @@ struct GameView: View {
 }
 
 struct GameView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        GameView(playAs: .zombie)
+        GameView(
+            playsAs: .zombie
+        )
     }
 }

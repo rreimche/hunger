@@ -38,10 +38,10 @@ struct MainMenuView: View {
         NavigationView {
             Form {
                 Section() {
-                    NavigationLink(destination: GameView(playAs: .human)){ Text("Play as 👩🏻‍💼").font(.title)
+                    NavigationLink(destination: GameView(playsAs: .human)){ Text("Play as 👩🏻‍💼").font(.title)
                     }
                     
-                    NavigationLink(destination: GameView(playAs: .zombie)){ Text("Play as 🧟‍♀️").font(.title)
+                    NavigationLink(destination: GameView(playsAs: .zombie)){ Text("Play as 🧟‍♀️").font(.title)
                     }
                     
                     
@@ -57,6 +57,10 @@ struct MainMenuView: View {
                     Button(action: logOut) { Text("Log out") }
                 }
             }.navigationBarTitle("Main Menu")
+            
+        }.onAppear{
+            // Reset collision status
+            self.locationManager.zombieCollidedWithHuman = false
         }
         
     }

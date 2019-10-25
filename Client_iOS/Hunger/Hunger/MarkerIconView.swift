@@ -13,7 +13,7 @@ struct MarkerIconView: View {
     
     //@ViewBuilder
     var body: some View {
-        Text("👩🏻‍💼")
+        Text("👩🏻‍💼").font(.largeTitle)
         /*switch iconFor {
         case .human: Text("👩🏻‍💼")
         case .zombie: Text("🧟‍♀️")

@@ -9,6 +9,7 @@
 import SwiftUI
 import Crashlytics
 
+// TODO disallow multiple logins of same uid
 struct SignInView: View {
     
     @State private var email : String = ""

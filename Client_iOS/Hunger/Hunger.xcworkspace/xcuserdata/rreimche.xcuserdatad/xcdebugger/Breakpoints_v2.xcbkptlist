@@ -32,8 +32,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "225"
             endingLineNumber = "225"
-            landmarkName = "LocationManager"
-            landmarkType = "3">
+            landmarkName = "keyEnteredProcessor(key:enteredUserLocation:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "1FBE8D81-DDD1-4DCB-8E36-C6041FF5BA6C - f05bce8ea6886147"
@@ -287,8 +287,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "125"
             endingLineNumber = "125"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "7">
+            landmarkName = "LocationManager"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -319,24 +319,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
             endingLineNumber = "178"
-            landmarkName = "keyEnteredProcessor(key:enteredUserLocation:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B27B9C26-D0D1-4D2A-A5CA-1FA692EF0149"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Hunger/LocationManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
-            landmarkName = "keyMovedProcessor(key:movedUserLocation:)"
-            landmarkType = "7">
+            landmarkName = "LocationManager"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -399,7 +383,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "327"
             endingLineNumber = "327"
-            landmarkName = "localUserCollidedWithAnotherPlayerType(anotherPlayer:)"
+            landmarkName = "localUserCollided(withUserAtLocation:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -415,8 +399,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "323"
             endingLineNumber = "323"
-            landmarkName = "localUserCollided(withUserAtLocation:)"
-            landmarkType = "7">
+            landmarkName = "LocationManager"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

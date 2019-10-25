@@ -14,9 +14,12 @@ import CoreLocation
 import Firebase
 import GeoFire
 
+
+// TODO find a way for LocationManager to start providing locations only when asked to.
+// TODO add removeAllObservers for the GeoFire somewhere?
 class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
-    // TODO add removeAllObservers for the GeoFire somewhere?
     
+    let defaultStartingLocation = CLLocation(latitude: 0, longitude: 0)
     private let manager: CLLocationManager
     private var dbRef: DatabaseReference!
     private var geoFire: GeoFire!
@@ -24,45 +27,13 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     private var circleQuery: GFCircleQuery?
     private var circleQueryHandles: Array<FirebaseHandle> = []
     private let databasePath = "players-online"
-    let defaultStartingLocation = CLLocation(latitude: 0, longitude: 0)
     private let circleQueryRadius: Double = 10 // in kilometers
     
-    // Distance at which two users are though to collide
-    let collisionDistance: Double = 5
+    // Distance at which two users are thought to collide
+    let collisionDistance: Double = 5 // in meters
     var zombieCollidedWithHuman = false
     
     // MARK: ObservableObject
-    
-    /*var didChange = PassthroughSubject<LocationManager, Never>()
-
-    // TODO CLLocation -> CLLocation?, no marker and appropriate message if nil
-    var lastKnownLocation: CLLocation {
-        didSet {
-            
-            // Post location to firebase.
-            self.dbRef.child(databasePath).child(session.user!.uid).setValue(true)
-            geoFire.setLocation(lastKnownLocation, forKey: session.user!.uid){ (error) in
-                if (error != nil) {
-                    print("An error occured: \(String(describing: error))")
-                } else {
-                    print("Saved new location of the local player to firebase successfully.")
-                }
-            }
-            
-            // Update circleQuery.
-            self.circleQuery.center = self.lastKnownLocation
-            
-            // Propagate the update to the observers.
-            didChange.send(self)
-            print("Finished propagating lastKnownLocation to the observers.")
-        }
-    }
-    
-    var nearbyPlayers : Set<User> = [] {
-        didSet {
-            didChange.send(self)
-        }
-    }*/
     
     @Published var lastKnownLocation: CLLocation?
     typealias DistanceToUser = CLLocationDistance
@@ -87,7 +58,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         
     }
     
-    // MARK: Start/Stop updating locations
+    // MARK: Go online/offline
     
     private func startUpdatingLocations(){
         self.manager.startUpdatingLocation()
@@ -120,7 +91,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         stopUpdatingLocations()
         dbRef.child(databasePath + "/" + session.user!.uid).removeValue()
         geoFire.removeKey(session.user!.uid)
-    } 
+    }
     
     // MARK: CLLocationManagerDelegate
 
@@ -228,14 +199,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         
     }
     
-    func keyExitedProcessor(key uid: String, exitedUserLocation: CLLocation) -> () {
-        print("Player with uid (key) '\(String(describing: uid))' exited the search area and is at location '\(String(describing: exitedUserLocation))'")
-
-        let exitedUser = User(uid: uid, displayName: nil, email: nil, location: exitedUserLocation)
-
-        self.nearbyPlayers.removeValue(forKey: exitedUser)
-    }
-    
     func keyMovedProcessor(key movedUid: String, movedUserLocation: CLLocation) -> () {
         
         if movedUid == session.user!.uid {
@@ -284,43 +247,16 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
 
         
     }
-
-// TODO remove
-//    let keyEnteredProcessor : gfEventProcessor = {(key: String!, location: CLLocation) -> Void in
-//
-//        print("Key '\(String(describing: key))' entered the search area and is at location '\(String(describing: location))'")
-//
-//        let uid = key
-//
-//        let user = User(uid: uid!, displayName: nil, email: nil, location: location)
-//
-//        self.nearbyPlayers.insert(user)
-//    }
-//
-//    let keyExitedProcessor : gfEventProcessor = {(key: String!, location: CLLocation) -> Void in
-//
-//        print("Key '\(String(describing: key))' exited the search area and is at location '\(String(describing: location))'")
-//
-//        let uid = key
-//
-//        let user = User(uid: uid!, displayName: nil, email: nil, location: location)
-//
-//        nearbyPlayers.remove(user)
-//
-//    }
-//
-//    let keyMovedProcessor : gfEventProcessor = {(key: String!, location: CLLocation) -> Void in
-//
-//        print("Key '\(String(describing: key))' moved in the search area and is at location '\(String(describing: location))'")
-//
-//        let uid = key
-//
-//        let user = User(uid: uid!, displayName: nil, email: nil, location: location)
-//
-//        nearbyPlayers.update(with: user)
-//    }
     
-    // MARK: Helper functions
+    func keyExitedProcessor(key uid: String, exitedUserLocation: CLLocation) -> () {
+        print("Player with uid (key) '\(String(describing: uid))' exited the search area and is at location '\(String(describing: exitedUserLocation))'")
+
+        let exitedUser = User(uid: uid, displayName: nil, email: nil, location: exitedUserLocation)
+
+        self.nearbyPlayers.removeValue(forKey: exitedUser)
+    }
+    
+    // MARK: Collision detection
     
     func localUserCollided(withUserAtLocation otherUsersLocation: CLLocation ) -> Bool {
         let distanceToUser = lastKnownLocation!.distance(from: otherUsersLocation)

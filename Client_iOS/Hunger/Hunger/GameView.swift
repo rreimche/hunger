@@ -151,7 +151,7 @@ struct GameView: View {
             
         } else {
             GameOverView().onAppear{
-                print("Zombies ate your brains! Game over")
+                print("Zombies ate your brains! Game over.")
             }
         }
     }
